@@ -85,8 +85,19 @@ view: ramp_elections {
     sql: ${TABLE}.veteran_file_number ;;
   }
 
+  dimension: response_time_days {
+    type: number
+    sql:  ${receipt_date} - ${notice_date} ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [id, notice_date, established_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count]
+    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, response_time_days]
+  }
+
+  measure: response_time_average {
+    type: average
+    sql: ${response_time_days} ;;
+    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, response_time_days]
   }
 }
