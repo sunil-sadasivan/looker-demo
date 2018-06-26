@@ -96,8 +96,8 @@ view: ramp_elections {
   }
 
   measure: response_time_average {
-    type: average
-    sql: ${response_time_days} ;;
+    type: number
+    sql: FLOOR(AVG(${response_time_days}));;
     drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, response_time_days]
   }
 }
