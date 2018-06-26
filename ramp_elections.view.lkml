@@ -87,6 +87,6 @@ view: ramp_elections {
 
   measure: count {
     type: count
-    drill_fields: [id, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count]
+    drill_fields: [id, notice_date, established_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count]
   }
 }
