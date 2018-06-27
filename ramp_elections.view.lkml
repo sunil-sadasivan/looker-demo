@@ -85,19 +85,30 @@ view: ramp_elections {
     sql: ${TABLE}.veteran_file_number ;;
   }
 
-  dimension: response_time_days {
+  dimension: veteran_response_time_days {
     type: number
     sql:  ${receipt_date} - ${notice_date} ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, response_time_days]
+  dimension: receipt_date_to_now {
+    type: number
+    sql:  current_date - ${receipt_date};;
   }
 
-  measure: response_time_average {
+  measure: count {
+    type: count
+    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, veteran_response_time_days]
+  }
+
+  measure: average_receipt_date_to_now {
     type: number
-    sql: FLOOR(AVG(${response_time_days}));;
-    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, response_time_days]
+    sql: FLOOR(AVG(${receipt_date_to_now}));;
+    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, veteran_response_time_days]
+  }
+
+  measure: veteran_response_time_average {
+    type: number
+    sql: FLOOR(AVG(${veteran_response_time_days}));;
+    drill_fields: [id, notice_date, established_date, receipt_date, option_selected, end_product_status, ramp_closed_appeals.count, ramp_election_rollbacks.count, ramp_refilings.count, veteran_response_time_days]
   }
 }
