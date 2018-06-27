@@ -321,12 +321,8 @@ explore: pg_stat_statements {
   }
 }
 
-explore: ramp_closed_appeals {
-  join: ramp_elections {
-    type: left_outer
-    sql_on: ${ramp_closed_appeals.ramp_election_id} = ${ramp_elections.id} ;;
-    relationship: many_to_one
-  }
+explore: ramp_closed_appeals_with_elections {
+
 }
 
 explore: ramp_election_rollbacks {
