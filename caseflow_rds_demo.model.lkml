@@ -50,10 +50,10 @@ explore: api_views {
     relationship: many_to_one
   }
 
-  join: legacy_appeals {
+  join: legacy_veterans {
     type: left_outer
-    sql_on: ${api_views.vbms_id} = ${legacy_appeals.vbms_id} ;;
-    relationship: one_to_many
+    sql_on: ${api_views.vbms_id} = ${legacy_veterans.vbms_id} ;;
+    relationship: one_to_one
   }
 }
 
