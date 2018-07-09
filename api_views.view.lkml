@@ -34,6 +34,12 @@ view: api_views {
 
   measure: count {
     type: count
-    drill_fields: [id, api_keys.consumer_name, api_keys.id]
+    drill_fields: [api_keys.consumer_name]
+  }
+
+  measure: unique_veterans {
+    type: count_distinct
+    sql: ${vbms_id} ;;
+    drill_fields: [api_keys.consumer_name]
   }
 }
