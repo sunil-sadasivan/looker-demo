@@ -151,11 +151,11 @@ view: dispatch_tasks {
     description: "Median time (in days) between task creation and completed date"
     type: median
     sql: ${time_to_complete};;
-    drill_fields: [id, appeals.id, users.full_name, users.id]
+    drill_fields: [id, appeals.id, users.full_name, users.id, aasm_state, created_date, prepared_date, started_date, assigned_date, completed_date, time_to_complete]
   }
 
   measure: count {
     type: count
-    drill_fields: [id, appeals.id, users.full_name, users.id]
+    drill_fields: [id, appeals.id, users.full_name, users.id, aasm_state, created_date, prepared_date, started_date, assigned_date, completed_date, time_to_complete]
   }
 }
