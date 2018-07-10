@@ -49,6 +49,12 @@ explore: api_views {
     sql_on: ${api_views.api_key_id} = ${api_keys.id} ;;
     relationship: many_to_one
   }
+
+  join: legacy_veterans {
+    type: left_outer
+    sql_on: ${api_views.vbms_id} = ${legacy_veterans.vbms_id} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: appeal_series {}
