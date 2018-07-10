@@ -127,10 +127,31 @@ view: dispatch_tasks {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension: time_to_complete {
+    description: "Time (in days) between task creation and completed date"
+    type: number
+    sql:  ${completed_date} - ${created_date} ;;
+  }
+
   dimension: user_id {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+  }
+
+  measure: average_completed_time {
+    description: "Average time (in days) between task creation and completed date"
+    type: average
+    sql: ${time_to_complete};;
+    value_format: "0"
+    drill_fields: [id, appeals.id, users.full_name, users.id]
+  }
+
+  measure: median_completed_time {
+    description: "Median time (in days) between task creation and completed date"
+    type: median
+    sql: ${time_to_complete};;
+    drill_fields: [id, appeals.id, users.full_name, users.id]
   }
 
   measure: count {
