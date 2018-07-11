@@ -127,10 +127,22 @@ view: dispatch_tasks {
     sql: ${TABLE}.updated_at ;;
   }
 
-  dimension: time_to_complete {
+  dimension: task_create_to_complete_time {
     description: "Time (in days) between task creation and completed date"
     type: number
     sql:  ${completed_date} - ${created_date} ;;
+  }
+
+  dimension: task_prepare_to_complete_time {
+    description: "Time (in days) between task prepared (Decision doc uploaded) and completed date"
+    type: number
+    sql:  ${completed_date} - ${prepared_date} ;;
+  }
+
+  dimension: task_create_to_prepare_time {
+    description: "Time (in days) between task created and prepared date (Decision doc uploaded)"
+    type: number
+    sql:  ${prepared_date} - ${created_date} ;;
   }
 
   dimension: user_id {
@@ -139,23 +151,47 @@ view: dispatch_tasks {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: average_completed_time {
-    description: "Average time (in days) between task creation and completed date"
-    type: average
-    sql: ${time_to_complete};;
-    value_format: "0"
-    drill_fields: [id, appeals.id, users.full_name, users.id]
+  set: dispatch_task_drill_fields {
+    fields: [
+      id,
+      appeals.id,
+      users.full_name,
+      users.id,
+      aasm_state,
+      created_date,
+      prepared_date,
+      started_date,
+      assigned_date,
+      completed_date,
+      task_prepare_to_complete_time,
+      task_create_to_prepare_time,
+      task_create_to_complete_time,
+    ]
   }
 
-  measure: median_completed_time {
+  measure: median_task_create_to_complete_time {
     description: "Median time (in days) between task creation and completed date"
     type: median
-    sql: ${time_to_complete};;
-    drill_fields: [id, appeals.id, users.full_name, users.id, aasm_state, created_date, prepared_date, started_date, assigned_date, completed_date, time_to_complete]
+    sql: ${task_create_to_complete_time};;
+    drill_fields: [dispatch_task_drill_fields*]
+  }
+
+  measure: median_task_create_to_prepare_time {
+    description: "Median time (in days) between task create (outcoded) and prepared date (Decision doc uploaded)"
+    type: median
+    sql: ${task_create_to_prepare_time};;
+    drill_fields: [dispatch_task_drill_fields*]
+  }
+
+  measure: median_task_prepare_to_complete_time {
+    description: "Median time (in days) between task prepared (Decision doc uploaded) and completed date"
+    type: median
+    sql: ${task_prepare_to_complete_time};;
+    drill_fields: [dispatch_task_drill_fields*]
   }
 
   measure: count {
     type: count
-    drill_fields: [id, appeals.id, users.full_name, users.id, aasm_state, created_date, prepared_date, started_date, assigned_date, completed_date, time_to_complete]
+    drill_fields: [dispatch_task_drill_fields*]
   }
 }
