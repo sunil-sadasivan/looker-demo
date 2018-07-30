@@ -3,7 +3,7 @@ view: vacols_corres {
 
   dimension: sactive {
     type: string
-    sql: ${TABLE}.SACTIVE ;;
+    sql: ${TABLE}."SACTIVE" ;;
     description: "Active/Inactive Flag"
   }
 
