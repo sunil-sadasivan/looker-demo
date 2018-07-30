@@ -38,7 +38,7 @@ view: vacols_brieff {
   dimension: bfattid {
     description: "Attorney ID"
     type: string
-    sql: ${TABLE}.BFATTID ;;
+    sql: ${TABLE}."BFATTID" ;;
   }
 
   dimension: bfboard {
@@ -50,7 +50,7 @@ view: vacols_brieff {
   dimension: bfbox {
     description: "Specialty Case Tracking (SCT) group"
     type: string
-    sql: ${TABLE}.BFBOX ;;
+    sql: ${TABLE}."BFBOX" ;;
   }
 
   dimension_group: bfbsasgn {
@@ -66,67 +66,67 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFBSASGN ;;
+    sql: ${TABLE}."BFBSASGN" ;;
   }
 
   dimension: bfcallup {
     description: "Outbased Travel Board Ind"
     type: string
-    sql: ${TABLE}.BFCALLUP ;;
+    sql: ${TABLE}."BFCALLUP" ;;
   }
 
   dimension: bfcallyymm {
     description: "CAPRI Patient List Add/Del Indicator"
     type: string
-    sql: ${TABLE}.BFCALLYYMM ;;
+    sql: ${TABLE}."BFCALLYYMM" ;;
   }
 
   dimension: bfcasev {
     description: "Appeal Program Area"
     type: string
-    sql: ${TABLE}.BFCASEV ;;
+    sql: ${TABLE}."BFCASEV" ;;
   }
 
   dimension: bfcaseva {
     description: "Not Used"
     type: string
-    sql: ${TABLE}.BFCASEVA ;;
+    sql: ${TABLE}."BFCASEVA" ;;
   }
 
   dimension: bfcasevb {
     description: "Not Used"
     type: string
-    sql: ${TABLE}.BFCASEVB ;;
+    sql: ${TABLE}."BFCASEVB" ;;
   }
 
   dimension: bfcasevc {
     description: "Not Used"
     type: string
-    sql: ${TABLE}.BFCASEVC ;;
+    sql: ${TABLE}."BFCASEVC" ;;
   }
 
   dimension: bfcclkid {
     description: "CAVC folder number"
     type: string
-    sql: ${TABLE}.BFCCLKID ;;
+    sql: ${TABLE}."BFCCLKID" ;;
   }
 
   dimension: bfcorkey {
     description: "Corres Table Key"
     type: string
-    sql: ${TABLE}.BFCORKEY ;;
+    sql: ${TABLE}."BFCORKEY" ;;
   }
 
   dimension: bfcorlid {
     description: "Appellant ID (SSN or Claim Number)"
     type: string
-    sql: ${TABLE}.BFCORLID ;;
+    sql: ${TABLE}."BFCORLID" ;;
   }
 
   dimension: bfcurloc {
     description: "Current Location of Case File"
     type: string
-    sql: ${TABLE}.BFCURLOC ;;
+    sql: ${TABLE}."BFCURLOC" ;;
   }
 
   dimension_group: bfd19 {
@@ -142,7 +142,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFD19 ;;
+    sql: ${TABLE}."BFD19" ;;
   }
 
   dimension_group: bfdarcin {
@@ -158,7 +158,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDARCIN ;;
+    sql: ${TABLE}."BFDARCIN" ;;
   }
 
   dimension_group: bfdarcout {
@@ -174,7 +174,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDARCOUT ;;
+    sql: ${TABLE}."BFDARCOUT" ;;
   }
 
   dimension_group: bfdasgn {
@@ -190,13 +190,13 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDASGN ;;
+    sql: ${TABLE}."BFDASGN" ;;
   }
 
   dimension: bfdc {
     description: "Disposition of Appeal"
     type: string
-    sql: ${TABLE}.BFDC ;;
+    sql: ${TABLE}."BFDC" ;;
   }
 
   dimension_group: bfdcertool {
@@ -211,31 +211,31 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDCERTOOL ;;
+    sql: ${TABLE}."BFDCERTOOL" ;;
   }
 
   dimension: bfdcfld1 {
     description: "DRO Informal Hearing"
     type: string
-    sql: ${TABLE}.BFDCFLD1 ;;
+    sql: ${TABLE}."BFDCFLD1" ;;
   }
 
   dimension: bfdcfld2 {
     description: "DRO Formal Hearing"
     type: string
-    sql: ${TABLE}.BFDCFLD2 ;;
+    sql: ${TABLE}."BFDCFLD2" ;;
   }
 
   dimension: bfdcfld3 {
     description: "DRO"
     type: string
-    sql: ${TABLE}.BFDCFLD3 ;;
+    sql: ${TABLE}."BFDCFLD3" ;;
   }
 
   dimension: bfdcn {
     description: "Stays Indicator (CUE, Tobacco, IVM)"
     type: string
-    sql: ${TABLE}.BFDCN ;;
+    sql: ${TABLE}."BFDCN" ;;
   }
 
   dimension_group: bfdcue {
@@ -251,7 +251,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDCUE ;;
+    sql: ${TABLE}."BFDCUE" ;;
   }
 
   dimension_group: bfddec {
@@ -267,7 +267,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDEC ;;
+    sql: ${TABLE}."BFDDEC" ;;
   }
 
   dimension_group: bfddro {
@@ -283,7 +283,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDRO ;;
+    sql: ${TABLE}."BFDDRO" ;;
   }
 
   dimension_group: bfddvdsp {
@@ -299,7 +299,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDVDSP ;;
+    sql: ${TABLE}."BFDDVDSP" ;;
   }
 
   dimension_group: bfddvin {
@@ -314,7 +314,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDVIN ;;
+    sql: ${TABLE}."BFDDVIN" ;;
   }
 
   dimension_group: bfddvout {
@@ -329,7 +329,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDVOUT ;;
+    sql: ${TABLE}."BFDDVOUT" ;;
   }
 
   dimension_group: bfddvret {
@@ -345,7 +345,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDVRET ;;
+    sql: ${TABLE}."BFDDVRET" ;;
   }
 
   dimension_group: bfddvwrk {
@@ -361,7 +361,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDDVWRK ;;
+    sql: ${TABLE}."BFDDVWRK" ;;
   }
 
   dimension_group: bfdlocin {
@@ -377,7 +377,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDLOCIN ;;
+    sql: ${TABLE}."BFDLOCIN" ;;
   }
 
   dimension_group: bfdloout {
@@ -393,7 +393,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDLOOUT ;;
+    sql: ${TABLE}."BFDLOOUT" ;;
   }
 
   dimension_group: bfdmcon {
@@ -409,7 +409,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDMCON ;;
+    sql: ${TABLE}."BFDMCON" ;;
   }
 
   dimension_group: bfdmem {
@@ -425,7 +425,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDMEM ;;
+    sql: ${TABLE}."BFDMEM" ;;
   }
 
   dimension_group: bfdnod {
@@ -441,13 +441,13 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDNOD ;;
+    sql: ${TABLE}."BFDNOD" ;;
   }
 
   dimension: bfdocind {
     description: "Video Hearing Requested Indicator"
     type: string
-    sql: ${TABLE}.BFDOCIND ;;
+    sql: ${TABLE}."BFDOCIND" ;;
   }
 
   dimension_group: bfdorg {
@@ -463,7 +463,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDORG ;;
+    sql: ${TABLE}."BFDORG" ;;
   }
 
   dimension_group: bfdpdcn {
@@ -479,7 +479,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDPDCN ;;
+    sql: ${TABLE}."BFDPDCN" ;;
   }
 
   dimension_group: bfdqrsnt {
@@ -495,7 +495,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDQRSNT ;;
+    sql: ${TABLE}."BFDQRSNT" ;;
   }
 
   dimension_group: bfdrocket {
@@ -511,7 +511,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDROCKET ;;
+    sql: ${TABLE}."BFDROCKET" ;;
   }
 
   dimension_group: bfdrodec {
@@ -527,19 +527,19 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDRODEC ;;
+    sql: ${TABLE}."BFDRODEC" ;;
   }
 
   dimension: bfdroid {
     description: "DRO Id"
     type: string
-    sql: ${TABLE}.BFDROID ;;
+    sql: ${TABLE}."BFDROID" ;;
   }
 
   dimension: bfdrortr {
     description: "Ready to Rate by DRO"
     type: string
-    sql: ${TABLE}.BFDRORTR ;;
+    sql: ${TABLE}."BFDRORTR" ;;
   }
 
   dimension_group: bfdsoc {
@@ -555,7 +555,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDSOC ;;
+    sql: ${TABLE}."BFDSOC" ;;
   }
 
   dimension_group: bfdtb {
@@ -571,7 +571,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDTB ;;
+    sql: ${TABLE}."BFDTB" ;;
   }
 
   dimension_group: bfdtbready {
@@ -587,7 +587,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDTBREADY ;;
+    sql: ${TABLE}."BFDTBREADY" ;;
   }
 
   dimension_group: bfdthurb {
@@ -603,146 +603,146 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFDTHURB ;;
+    sql: ${TABLE}."BFDTHURB" ;;
   }
 
   dimension: bfha {
     description: "Hearing Action"
     type: string
-    sql: ${TABLE}.BFHA ;;
+    sql: ${TABLE}."BFHA" ;;
   }
 
   dimension: bfhines {
     description: "GenPop ind for Ret VLJ Hearing cases"
     type: string
-    sql: ${TABLE}.BFHINES ;;
+    sql: ${TABLE}."BFHINES" ;;
   }
 
   dimension: bfhr {
     description: "Travel Board Hearing Requested"
     type: string
-    sql: ${TABLE}.BFHR ;;
+    sql: ${TABLE}."BFHR" ;;
   }
 
   dimension: bfic {
     description: "Not Used"
     type: string
-    sql: ${TABLE}.BFIC ;;
+    sql: ${TABLE}."BFIC" ;;
   }
 
   dimension: bfio {
     description: "Not Used (old Primary Issue Code used prior to 6/99)"
     type: string
-    sql: ${TABLE}.BFIO ;;
+    sql: ${TABLE}."BFIO" ;;
   }
 
   dimension: bfissnr {
     description: "Number of Issues (computed via batch update)"
     type: string
-    sql: ${TABLE}.BFISSNR ;;
+    sql: ${TABLE}."BFISSNR" ;;
   }
 
   dimension: bfkey {
     description: "Folder Number (Unique Primary Key)"
     primary_key: yes
     type: string
-    sql: ${TABLE}.BFKEY ;;
+    sql: ${TABLE}."BFKEY" ;;
   }
 
   dimension: bflot {
     description: "OVLJ Admin Action"
     type: string
-    sql: ${TABLE}.BFLOT ;;
+    sql: ${TABLE}."BFLOT" ;;
   }
 
   dimension: bfmemid {
     description: "Board Member Id"
     type: string
-    sql: ${TABLE}.BFMEMID ;;
+    sql: ${TABLE}."BFMEMID" ;;
   }
 
   dimension: bfmpro {
     description: "Appeal Status"
     type: string
-    sql: ${TABLE}.BFMPRO ;;
+    sql: ${TABLE}."BFMPRO" ;;
   }
 
   dimension: bfms {
     description: "Mailing Status (R - Remand returned A - Adv Sent)"
     type: string
-    sql: ${TABLE}.BFMS ;;
+    sql: ${TABLE}."BFMS" ;;
   }
 
   dimension: bfmstat {
     description: "Mail Status"
     type: string
-    sql: ${TABLE}.BFMSTAT ;;
+    sql: ${TABLE}."BFMSTAT" ;;
   }
 
   dimension: bfnrci {
     description: "Number of Copies for Congressional Interest"
     type: string
-    sql: ${TABLE}.BFNRCI ;;
+    sql: ${TABLE}."BFNRCI" ;;
   }
 
   dimension: bfnrcopy {
     description: "Total Number of Copies for Duplication"
     type: string
-    sql: ${TABLE}.BFNRCOPY ;;
+    sql: ${TABLE}."BFNRCOPY" ;;
   }
 
   dimension: bfoc {
     description: "Opinion Code"
     type: string
-    sql: ${TABLE}.BFOC ;;
+    sql: ${TABLE}."BFOC" ;;
   }
 
   dimension: bforgtic {
     description: "Sub-location - Home , Shelf loc, VSO employee"
     type: string
-    sql: ${TABLE}.BFORGTIC ;;
+    sql: ${TABLE}."BFORGTIC" ;;
   }
 
   dimension: bfpdnum {
     description: "Insurance/Loan Number"
     type: string
-    sql: ${TABLE}.BFPDNUM ;;
+    sql: ${TABLE}."BFPDNUM" ;;
   }
 
   dimension: bfrdmref {
     description: "Remand Destination (D=AMC R=RO V=VHA G=GC N=NCA)"
     type: string
-    sql: ${TABLE}.BFRDMREF ;;
+    sql: ${TABLE}."BFRDMREF" ;;
   }
 
   dimension: bfregoff {
     description: "Regional Office"
     type: string
-    sql: ${TABLE}.BFREGOFF ;;
+    sql: ${TABLE}."BFREGOFF" ;;
   }
 
   dimension: bfro1 {
     description: "Resource Center (Remands) (RO15, RO25, RO17, RO46, RO97)"
     type: string
-    sql: ${TABLE}.BFRO1 ;;
+    sql: ${TABLE}."BFRO1" ;;
   }
 
   dimension: bfrocdoc {
     description: "Rocket Docket indicator (S = Selected or R = Reviewed not selected H=Hearing select)"
     type: string
-    sql: ${TABLE}.BFROCDOC ;;
+    sql: ${TABLE}."BFROCDOC" ;;
   }
 
   dimension: bfsh {
     description: "Special Handling"
     type: string
-    sql: ${TABLE}.BFSH ;;
+    sql: ${TABLE}."BFSH" ;;
   }
 
   dimension: bfso {
     description: "Service Organization"
     type: string
-    sql: ${TABLE}.BFSO ;;
+    sql: ${TABLE}."BFSO" ;;
   }
 
   dimension_group: bfssoc1 {
@@ -758,7 +758,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFSSOC1 ;;
+    sql: ${TABLE}."BFSSOC1" ;;
   }
 
   dimension_group: bfssoc2 {
@@ -774,7 +774,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFSSOC2 ;;
+    sql: ${TABLE}."BFSSOC2" ;;
   }
 
   dimension_group: bfssoc3 {
@@ -790,7 +790,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFSSOC3 ;;
+    sql: ${TABLE}."BFSSOC3" ;;
   }
 
   dimension_group: bfssoc4 {
@@ -806,7 +806,7 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFSSOC4 ;;
+    sql: ${TABLE}."BFSSOC4" ;;
   }
 
   dimension_group: bfssoc5 {
@@ -822,31 +822,31 @@ view: vacols_brieff {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.BFSSOC5 ;;
+    sql: ${TABLE}."BFSSOC5" ;;
   }
 
   dimension: bfst {
     description: "DRO Partial Grant/Denial (P or D)"
     type: string
-    sql: ${TABLE}.BFST ;;
+    sql: ${TABLE}."BFST" ;;
   }
 
   dimension: bfstasgn {
     description: "Medical Facility"
     type: string
-    sql: ${TABLE}.BFSTASGN ;;
+    sql: ${TABLE}."BFSTASGN" ;;
   }
 
   dimension: bfsub {
     description: "Substitution appeal indicator ('S' or null)"
     type: string
-    sql: ${TABLE}.BFSUB ;;
+    sql: ${TABLE}."BFSUB" ;;
   }
 
   dimension: bftbind {
     description: "Travel Board Ready"
     type: string
-    sql: ${TABLE}.BFTBIND ;;
+    sql: ${TABLE}."BFTBIND" ;;
   }
 
   measure: count {

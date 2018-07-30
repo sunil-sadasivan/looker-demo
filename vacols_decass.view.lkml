@@ -3,7 +3,7 @@ view: vacols_decass {
 
   dimension: de1_touch {
     type: string
-    sql: ${TABLE}.DE1TOUCH ;;
+    sql: ${TABLE}."DE1TOUCH" ;;
   }
 
   dimension_group: deadtim {
@@ -17,17 +17,17 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DEADTIM ;;
+    sql: ${TABLE}."DEADTIM" ;;
   }
 
   dimension: deadusr {
     type: string
-    sql: ${TABLE}.DEADUSR ;;
+    sql: ${TABLE}."DEADUSR" ;;
   }
 
   dimension: dearem {
     type: string
-    sql: ${TABLE}.DEAREM ;;
+    sql: ${TABLE}."DEAREM" ;;
   }
 
   dimension_group: deassign {
@@ -41,22 +41,22 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DEASSIGN ;;
+    sql: ${TABLE}."DEASSIGN" ;;
   }
 
   dimension: deatcom {
     type: string
-    sql: ${TABLE}.DEATCOM ;;
+    sql: ${TABLE}."DEATCOM" ;;
   }
 
   dimension: deatty {
     type: string
-    sql: ${TABLE}.DEATTY ;;
+    sql: ${TABLE}."DEATTY" ;;
   }
 
   dimension: debmcom {
     type: string
-    sql: ${TABLE}.DEBMCOM ;;
+    sql: ${TABLE}."DEBMCOM" ;;
   }
 
   dimension_group: decomp {
@@ -70,7 +70,7 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DECOMP ;;
+    sql: ${TABLE}."DECOMP" ;;
   }
 
   dimension_group: dedeadline {
@@ -84,42 +84,42 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DEDEADLINE ;;
+    sql: ${TABLE}."DEDEADLINE" ;;
   }
 
   dimension: dedocid {
     type: string
-    sql: ${TABLE}.DEDOCID ;;
+    sql: ${TABLE}."DEDOCID" ;;
   }
 
   dimension: defcr {
     type: number
-    sql: ${TABLE}.DEFCR ;;
+    sql: ${TABLE}."DEFCR" ;;
   }
 
   dimension: defdiff {
     type: string
-    sql: ${TABLE}.DEFDIFF ;;
+    sql: ${TABLE}."DEFDIFF" ;;
   }
 
   dimension: defolder {
     type: string
-    sql: ${TABLE}.DEFOLDER ;;
+    sql: ${TABLE}."DEFOLDER" ;;
   }
 
   dimension: dehours {
     type: number
-    sql: ${TABLE}.DEHOURS ;;
+    sql: ${TABLE}."DEHOURS" ;;
   }
 
   dimension: deicr {
     type: number
-    sql: ${TABLE}.DEICR ;;
+    sql: ${TABLE}."DEICR" ;;
   }
 
   dimension: delock {
     type: string
-    sql: ${TABLE}.DELOCK ;;
+    sql: ${TABLE}."DELOCK" ;;
   }
 
   dimension_group: demdtim {
@@ -133,32 +133,32 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DEMDTIM ;;
+    sql: ${TABLE}."DEMDTIM" ;;
   }
 
   dimension: demdusr {
     type: string
-    sql: ${TABLE}.DEMDUSR ;;
+    sql: ${TABLE}."DEMDUSR" ;;
   }
 
   dimension: dememid {
     type: string
-    sql: ${TABLE}.DEMEMID ;;
+    sql: ${TABLE}."DEMEMID" ;;
   }
 
   dimension: deoq {
     type: string
-    sql: ${TABLE}.DEOQ ;;
+    sql: ${TABLE}."DEOQ" ;;
   }
 
   dimension: depdiff {
     type: string
-    sql: ${TABLE}.DEPDIFF ;;
+    sql: ${TABLE}."DEPDIFF" ;;
   }
 
   dimension: deprod {
     type: string
-    sql: ${TABLE}.DEPROD ;;
+    sql: ${TABLE}."DEPROD" ;;
   }
 
   dimension_group: deprogrev {
@@ -172,62 +172,62 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DEPROGREV ;;
+    sql: ${TABLE}."DEPROGREV" ;;
   }
 
   dimension: deqr1 {
     type: string
-    sql: ${TABLE}.DEQR1 ;;
+    sql: ${TABLE}."DEQR1" ;;
   }
 
   dimension: deqr10 {
     type: string
-    sql: ${TABLE}.DEQR10 ;;
+    sql: ${TABLE}."DEQR10" ;;
   }
 
   dimension: deqr11 {
     type: string
-    sql: ${TABLE}.DEQR11 ;;
+    sql: ${TABLE}."DEQR11" ;;
   }
 
   dimension: deqr2 {
     type: string
-    sql: ${TABLE}.DEQR2 ;;
+    sql: ${TABLE}."DEQR2" ;;
   }
 
   dimension: deqr3 {
     type: string
-    sql: ${TABLE}.DEQR3 ;;
+    sql: ${TABLE}."DEQR3" ;;
   }
 
   dimension: deqr4 {
     type: string
-    sql: ${TABLE}.DEQR4 ;;
+    sql: ${TABLE}."DEQR4" ;;
   }
 
   dimension: deqr5 {
     type: string
-    sql: ${TABLE}.DEQR5 ;;
+    sql: ${TABLE}."DEQR5" ;;
   }
 
   dimension: deqr6 {
     type: string
-    sql: ${TABLE}.DEQR6 ;;
+    sql: ${TABLE}."DEQR6" ;;
   }
 
   dimension: deqr7 {
     type: string
-    sql: ${TABLE}.DEQR7 ;;
+    sql: ${TABLE}."DEQR7" ;;
   }
 
   dimension: deqr8 {
     type: string
-    sql: ${TABLE}.DEQR8 ;;
+    sql: ${TABLE}."DEQR8" ;;
   }
 
   dimension: deqr9 {
     type: string
-    sql: ${TABLE}.DEQR9 ;;
+    sql: ${TABLE}."DEQR9" ;;
   }
 
   dimension_group: dereceive {
@@ -241,22 +241,22 @@ view: vacols_decass {
       quarter,
       year
     ]
-    sql: ${TABLE}.DERECEIVE ;;
+    sql: ${TABLE}."DERECEIVE" ;;
   }
 
   dimension: derecommend {
     type: string
-    sql: ${TABLE}.DERECOMMEND ;;
+    sql: ${TABLE}."DERECOMMEND" ;;
   }
 
   dimension: deteam {
     type: string
-    sql: ${TABLE}.DETEAM ;;
+    sql: ${TABLE}."DETEAM" ;;
   }
 
   dimension: detrem {
     type: string
-    sql: ${TABLE}.DETREM ;;
+    sql: ${TABLE}."DETREM" ;;
   }
 
   measure: count {
