@@ -418,3 +418,9 @@ explore: worksheet_issues {
     relationship: many_to_one
   }
 }
+
+explore: vacols_brieff {}
+
+explore: vacols_corres {}
+
+explore: vacols_decass {}
