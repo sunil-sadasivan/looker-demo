@@ -303,6 +303,12 @@ explore: legacy_appeals {
     sql_on: ${legacy_appeals.appeal_series_id} = ${appeal_series.id} ;;
     relationship: many_to_one
   }
+
+  join: vacols_brieff {
+    type: left_outer
+    sql_on: ${vacols_brieff.bfkey} = ${legacy_appeals.vacols_id} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: non_availabilities {
