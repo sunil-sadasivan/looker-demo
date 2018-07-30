@@ -43,6 +43,7 @@ view: vacols_corres {
     sql: ${TABLE}."SADDRSTT" ;;
   }
 
+
   dimension: saddrzip {
     description: "Appellant Residence Zip Code"
     type: string
