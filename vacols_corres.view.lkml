@@ -159,6 +159,23 @@ view: vacols_corres {
     sql: ${TABLE}."SNOTES" ;;
   }
 
+  dimension_group: snotes_date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year,
+      time
+    ]
+    convert_tz: no
+    datatype: datetime
+    description: "Notes converted to a date"
+    sql: to_timestamp(${TABLE}."SNOTES", 'YYYY-MM-DD HH24:MI:SS');;
+  }
+
   dimension: sorc1 {
     description: "Not Used"
     type: number
