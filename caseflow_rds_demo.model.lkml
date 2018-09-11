@@ -295,6 +295,12 @@ explore: judge_case_reviews {
     sql_on: ${tasks.appeal_id} = ${appeals.id} ;;
     relationship: many_to_one
   }
+
+  join: users {
+    type:  left_outer
+    sql_on: ${judge_case_reviews.judge_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: legacy_appeals {
