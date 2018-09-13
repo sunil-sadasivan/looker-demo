@@ -23,6 +23,17 @@ view: vacols_brieff {
     sql: ${TABLE}."BFAC" ;;
   }
 
+  dimension: bfac_translated {
+    description: "Type Action"
+    type: string
+    sql: CASE
+        WHEN ${bfac} = 1 THEN 'Fall'
+        ELSE ${bfac}
+      END
+      ;;
+  }
+
+
   dimension: bfarc {
     description: "Appeals Recource Center (for brokered appeals)"
     type: string

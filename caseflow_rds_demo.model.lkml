@@ -296,11 +296,6 @@ explore: judge_case_reviews {
     relationship: many_to_one
   }
 
-  join: users {
-    type:  left_outer
-    sql_on: ${judge_case_reviews.judge_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
 }
 
 explore: legacy_appeals {
@@ -436,3 +431,11 @@ explore: vacols_brieff {}
 explore: vacols_corres {}
 
 explore: vacols_decass {}
+
+explore: vacols_hearsched {
+  join: vacols_brieff {
+    type: left_outer
+    sql_on:  ${vacols_hearsched.folder_nr} = ${vacols_brieff.bfkey} ;;
+    relationship: many_to_one
+  }
+}
