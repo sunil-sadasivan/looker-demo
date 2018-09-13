@@ -46,6 +46,11 @@ view: judge_case_reviews {
     sql: ${TABLE}.factors_not_considered ;;
   }
 
+  dimension: is_legacy {
+    type: yesno
+    sql: strpos(${task_id}, '-') > 0 ;;
+  }
+
   dimension: judge_id {
     type: number
     sql: ${TABLE}.judge_id ;;
