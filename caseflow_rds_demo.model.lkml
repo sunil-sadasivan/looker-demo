@@ -447,3 +447,5 @@ explore: vacols_hearsched {
 }
 
 explore: vacols_folder {}
+
+explore: vacols_staff {}
