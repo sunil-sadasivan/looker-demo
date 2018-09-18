@@ -449,3 +449,9 @@ explore: vacols_hearsched {
 explore: vacols_folder {}
 
 explore: vacols_staff {}
+
+explore: vacols_issref {}
+
+explore: vacols_issues{}
+
+explore: vacols_tbsched {}
