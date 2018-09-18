@@ -8,11 +8,13 @@ view: vacols_folder {
   }
 
   dimension: tiaddrto {
+    description: "CAVC Docket number for Motions"
     type: string
     sql: ${TABLE}.tiaddrto ;;
   }
 
   dimension_group: tiadtime {
+    description: "Datetime added to Docket"
     type: time
     timeframes: [
       raw,
@@ -27,26 +29,31 @@ view: vacols_folder {
   }
 
   dimension: tiaduser {
+    description: "Staff who added to docket"
     type: string
     sql: ${TABLE}.tiaduser ;;
   }
 
   dimension: tiagor {
+    description: "Special interests Agent Orange"
     type: string
     sql: ${TABLE}.tiagor ;;
   }
 
   dimension: tiaids {
+    description: "AIDS/HIV"
     type: string
     sql: ${TABLE}.tiaids ;;
   }
 
   dimension: tiasbt {
+    description: "Asbestos"
     type: string
     sql: ${TABLE}.tiasbt ;;
   }
 
   dimension_group: ticerullo {
+    description: "Cerullo Order date for motions"
     type: time
     timeframes: [
       raw,
@@ -61,6 +68,7 @@ view: vacols_folder {
   }
 
   dimension: ticknum {
+    description: "Folder Number (Assign(tsktknm), Attach(imgtkky) Brieff(bfkey), Hearsched(folder_nr), Priorloc(lockey))"
     type: string
     sql: ${TABLE}.ticknum ;;
   }
@@ -68,20 +76,6 @@ view: vacols_folder {
   dimension: ticlcw {
     type: string
     sql: ${TABLE}.ticlcw ;;
-  }
-
-  dimension_group: ticlstme {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.ticlstme ;;
   }
 
   dimension: ticorkey {
@@ -175,7 +169,7 @@ view: vacols_folder {
   }
 
   dimension: tikeywrd {
-    description: "Key word"
+    description: "Keyword"
     type: string
     sql: ${TABLE}.tikeywrd ;;
   }
@@ -202,16 +196,13 @@ view: vacols_folder {
   }
 
   dimension: timgas {
+    description: "Mustard Gas"
     type: string
     sql: ${TABLE}.timgas ;;
   }
 
-  dimension: timt {
-    type: string
-    sql: ${TABLE}.timt ;;
-  }
-
   dimension: tinnme {
+    description: "No New and Material "
     type: string
     sql: ${TABLE}.tinnme ;;
   }
@@ -222,21 +213,25 @@ view: vacols_folder {
   }
 
   dimension: tinosc {
+    description: "No special contentions"
     type: string
     sql: ${TABLE}.tinosc ;;
   }
 
   dimension: tinum {
+    description: "Docket number"
     type: string
     sql: ${TABLE}.tinum ;;
   }
 
   dimension: tinwgr {
+    description: "Not well grounded"
     type: string
     sql: ${TABLE}.tinwgr ;;
   }
 
   dimension_group: tioctime {
+    description: "Outcode date"
     type: time
     timeframes: [
       raw,
@@ -251,36 +246,43 @@ view: vacols_folder {
   }
 
   dimension: tiocuser {
+    description: "Outcoder"
     type: string
     sql: ${TABLE}.tiocuser ;;
   }
 
   dimension: tiplexpress {
+    description: "Pilot express lane"
     type: string
     sql: ${TABLE}.tiplexpress ;;
   }
 
   dimension: tiplnod {
+    description: "Pilot standardized NOD"
     type: string
     sql: ${TABLE}.tiplnod ;;
   }
 
   dimension: tiplwaiver {
+    description: "Pilot waiver form"
     type: string
     sql: ${TABLE}.tiplwaiver ;;
   }
 
   dimension: tipres {
+    description: "Pre-discharge VA exam"
     type: string
     sql: ${TABLE}.tipres ;;
   }
 
   dimension: tiptsd {
+    description: "PTSD"
     type: string
     sql: ${TABLE}.tiptsd ;;
   }
 
   dimension_group: tipulac {
+    description: "Pulac Order Date (for Motions)"
     type: time
     timeframes: [
       raw,
@@ -295,113 +297,117 @@ view: vacols_folder {
   }
 
   dimension: tiradb {
+    description: "Radiation Bomb"
     type: string
     sql: ${TABLE}.tiradb ;;
   }
 
   dimension: tiradn {
+    description: "Radiation Non-bomb"
     type: string
     sql: ${TABLE}.tiradn ;;
   }
 
-  dimension: tiread1 {
-    type: string
-    sql: ${TABLE}.tiread1 ;;
-  }
-
   dimension: tiread2 {
+    description: "Citation number"
     type: string
     sql: ${TABLE}.tiread2 ;;
   }
 
   dimension: tiresp1 {
+    description: "Transferring Regional Office"
     type: string
     sql: ${TABLE}.tiresp1 ;;
   }
 
   dimension: tisarc {
+    description: "Sarcoidosis"
     type: string
     sql: ${TABLE}.tisarc ;;
   }
 
   dimension: tisexh {
+    description: "Sexual Harrasement"
     type: string
     sql: ${TABLE}.tisexh ;;
   }
 
   dimension: tisnl {
+    description: "SNL indicator"
     type: string
     sql: ${TABLE}.tisnl ;;
   }
 
   dimension: tispare1 {
+    description: "GC Attorney Last for motions"
     type: string
     sql: ${TABLE}.tispare1 ;;
   }
 
   dimension: tispare2 {
+    description: "GC Attorney First for motions"
     type: string
     sql: ${TABLE}.tispare2 ;;
   }
 
   dimension: tispare3 {
+    description: "Character Count for Decision (Archive Process)"
     type: string
     sql: ${TABLE}.tispare3 ;;
   }
 
   dimension: tistkey {
+    description: "Staff Owner"
     type: string
     sql: ${TABLE}.tistkey ;;
   }
 
   dimension: tisubj {
+    description: "NOA filed (for Motions)"
     type: string
     sql: ${TABLE}.tisubj ;;
   }
 
   dimension: tisubj1 {
+    description: "ECA Appeal ind."
     type: string
     sql: ${TABLE}.tisubj1 ;;
   }
 
   dimension: tisubj2 {
+    description: "Paperless Appeal (Virtual VA)"
     type: string
     sql: ${TABLE}.tisubj2 ;;
   }
 
-  dimension: tisys {
-    type: string
-    sql: ${TABLE}.tisys ;;
-  }
-
   dimension: titoba {
+    description: "Tobacco"
     type: string
     sql: ${TABLE}.titoba ;;
   }
 
   dimension: titrnum {
+    description: "Appeal Id"
     type: string
     sql: ${TABLE}.titrnum ;;
   }
 
   dimension: titrtm {
+    description: "Total rating termination"
     type: string
     sql: ${TABLE}.titrtm ;;
   }
 
   dimension: tivbms {
+    description: "VBMS appeal indicator"
     type: string
     sql: ${TABLE}.tivbms ;;
   }
 
   dimension: tiwpptr {
+    description: "Motion Notes for motions"
     type: string
     sql: ${TABLE}.tiwpptr ;;
-  }
-
-  dimension: tiwpptrt {
-    type: string
-    sql: ${TABLE}.tiwpptrt ;;
   }
 
   measure: count {
