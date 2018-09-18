@@ -445,3 +445,5 @@ explore: vacols_hearsched {
     relationship: many_to_one
   }
 }
+
+explore: vacols_folder {}
