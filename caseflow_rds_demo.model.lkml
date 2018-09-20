@@ -446,7 +446,14 @@ explore: vacols_hearsched {
   }
 }
 
-explore: vacols_folder {}
+explore: vacols_folder {
+  join: vacols_brieff {
+    type: left_outer
+    sql_on: ${vacols_brieff.bfkey} = ${vacols_folder.ticknum} ;;
+    relationship: many_to_one
+  }
+
+}
 
 explore: vacols_staff {}
 
