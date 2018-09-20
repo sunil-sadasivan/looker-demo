@@ -1,5 +1,18 @@
 view: vacols_folder {
-  sql_table_name: vacols.folder ;;
+
+  derived_table: {
+    # This returns all entries of vacols.folder, along side an AOD count (to replicate the vacols.aod_cnt() function in VACOLS)
+    sql: SELECT *,
+    (select count(*) into dcnt from vacols.assign where tsktknm = vf.ticknum and tskactcd in ('B', 'B1', 'B2')) +
+      (select count(*) into hcnt from vacols.hearsched where folder_nr = vf.ticknum and hearing_type in ('C', 'T', 'V') and aod in ('G', 'Y')) as AOD
+    from vacols.folder vf ;;
+  }
+
+  dimension: aod_cnt {
+    description:  "AOD Status Count (if > 0, then this is indicated as AOD status)"
+    type: number
+    sql: ${TABLE}.AOD;;
+  }
 
   dimension: ti38us {
     description: "38 U.S.C. 1151"
