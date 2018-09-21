@@ -89,9 +89,9 @@ view: tasks {
     sql: ${TABLE}.status ;;
   }
 
-  dimension: title {
+  dimension: action {
     type: string
-    sql: ${TABLE}.title ;;
+    sql: ${TABLE}.action ;;
   }
 
   dimension: type {
