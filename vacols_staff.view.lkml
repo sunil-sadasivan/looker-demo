@@ -86,12 +86,14 @@ view: vacols_staff {
 
   dimension: snamef {
     description: "Staff Member first name"
+    label: "First name"
     type: string
     sql: ${TABLE}.snamef ;;
   }
 
   dimension: snamel {
     description: "Staff Member last name"
+    label: "Last name"
     type: string
     sql: ${TABLE}.snamel ;;
   }

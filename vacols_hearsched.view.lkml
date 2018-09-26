@@ -117,7 +117,15 @@ view: vacols_hearsched {
 
   dimension: hearing_disp {
     type: string
-    sql: ${TABLE}.hearing_disp ;;
+    sql: CASE
+        WHEN ${TABLE}.hearing_disp = 'C' THEN 'Canceled'
+        WHEN ${TABLE}.hearing_disp = 'H' THEN 'Held'
+        WHEN ${TABLE}.hearing_disp = 'N' THEN 'No Show'
+        WHEN ${TABLE}.hearing_disp = 'P' THEN 'Postponed'
+        WHEN ${TABLE}.hearing_disp = 'W' THEN 'Widthrawn'
+        ELSE ${TABLE}.hearing_disp
+      END
+      ;;
   }
 
   dimension: hearing_pkseq {
@@ -126,8 +134,15 @@ view: vacols_hearsched {
   }
 
   dimension: hearing_type {
+    description:  "Hearing type"
     type: string
-    sql: ${TABLE}.hearing_type ;;
+    sql: CASE
+        WHEN ${TABLE}.hearing_type = 'C' THEN 'Central'
+        WHEN ${TABLE}.hearing_type = 'T' THEN 'Travel'
+        WHEN ${TABLE}.hearing_type = 'V' THEN 'Video'
+        ELSE ${TABLE}.hearing_type
+      END
+      ;;
   }
 
   dimension: holddays {
@@ -269,5 +284,10 @@ view: vacols_hearsched {
   measure: count {
     type: count
     drill_fields: [repname]
+  }
+
+  measure: hearing_result_count {
+    type: count
+    drill_fields: [hearing_disp, board_member]
   }
 }

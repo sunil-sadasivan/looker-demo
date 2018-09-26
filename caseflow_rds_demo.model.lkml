@@ -444,6 +444,12 @@ explore: vacols_hearsched {
     sql_on:  ${vacols_hearsched.folder_nr} = ${vacols_brieff.bfkey} ;;
     relationship: many_to_one
   }
+
+  join: vacols_staff {
+    type:  left_outer
+    sql_on: ${vacols_hearsched.board_member} = ${vacols_staff.sattyid} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: vacols_folder {
