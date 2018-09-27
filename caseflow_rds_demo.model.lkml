@@ -97,6 +97,7 @@ explore: attorney_case_reviews {
   }
 
   join: users {
+    view_label: "Attorneys"
     type: left_outer
     sql_on: ${attorney_case_reviews.attorney_id} = ${users.id} ;;
     relationship: many_to_one
