@@ -96,11 +96,19 @@ explore: attorney_case_reviews {
     relationship: many_to_one
   }
 
-  join: users {
-    view_label: "Attorneys"
+  join: attorneys {
+    from: users
     type: left_outer
-    sql_on: ${attorney_case_reviews.attorney_id} = ${users.id} ;;
+    sql_on: ${attorney_case_reviews.attorney_id} = ${attorneys.id} ;;
     relationship: many_to_one
+  }
+
+  join: judges {
+    from: users
+    type: left_outer
+    sql_on: ${attorney_case_reviews.reviewing_judge_id} = ${judges.id} ;;
+    relationship: many_to_one
+
   }
 }
 
@@ -426,6 +434,7 @@ explore: user_quotas {
 }
 
 explore: users {}
+
 
 explore: versions {}
 
