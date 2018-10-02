@@ -96,6 +96,12 @@ explore: attorney_case_reviews {
     relationship: many_to_one
   }
 
+  join: request_issues {
+    type: left_outer
+    sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id} ;;
+    relationship: many_to_one
+  }
+
   join: attorneys {
     from: users
     type: left_outer
@@ -413,6 +419,12 @@ explore: tasks {
   join: appeals {
     type: left_outer
     sql_on: ${tasks.appeal_id} = ${appeals.id} ;;
+    relationship: many_to_one
+  }
+
+  join: users {
+    type: left_outer
+    sql_on: ${tasks.assigned_to_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
