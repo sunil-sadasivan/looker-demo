@@ -422,9 +422,17 @@ explore: tasks {
     relationship: many_to_one
   }
 
-  join: users {
+  join: assigned_to_user {
+    from: users
     type: left_outer
-    sql_on: ${tasks.assigned_to_id} = ${users.id} ;;
+    sql_on: ${tasks.assigned_to_id} = ${assigned_to_user.id} ;;
+    relationship: many_to_one
+  }
+
+  join: assigned_by_user {
+    from: users
+    type: left_outer
+    sql_on: ${tasks.assigned_by_id} = ${assigned_by_user.id} ;;
     relationship: many_to_one
   }
 }
