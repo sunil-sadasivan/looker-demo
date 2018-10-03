@@ -27,7 +27,16 @@ view: vacols_issues {
 
   dimension: issdc {
     type: string
-    sql: ${TABLE}.issdc ;;
+    sql: CASE
+        WHEN ${TABLE}.issdc = '1' THEN 'Allowed'
+        WHEN ${TABLE}.issdc = '3' THEN 'Remanded'
+        WHEN ${TABLE}.issdc = '4' THEN 'Denied'
+        WHEN ${TABLE}.issdc = '5' THEN 'Vacated'
+        WHEN ${TABLE}.issdc = '6' THEN 'Dismissed, Withdrawn'
+        WHEN ${TABLE}.issdc = '8' THEN 'Dismissed, Death'
+        ELSE ${TABLE}.issdc
+      END
+      ;;
   }
 
   dimension_group: issdcls {
@@ -115,7 +124,7 @@ view: vacols_issues {
 
   measure: issdc_count {
     type: count
-    drill_fields: [issdc]
+    drill_fields: [issdc, isscode]
   }
 
   measure: count {
