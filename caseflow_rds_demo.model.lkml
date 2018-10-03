@@ -432,7 +432,13 @@ explore: worksheet_issues {
   }
 }
 
-explore: vacols_brieff {}
+explore: vacols_brieff {
+  join: vacols_staff {
+    type: left_outer
+    sql_on: ${vacols_brieff.bfmemid} = ${vacols_staff.sattyid} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: vacols_corres {}
 
@@ -465,6 +471,18 @@ explore: vacols_staff {}
 
 explore: vacols_issref {}
 
-explore: vacols_issues{}
+explore: vacols_issues{
+  join: vacols_brieff {
+    type: left_outer
+    sql_on: ${vacols_issues.isskey} = ${vacols_brieff.bfkey} ;;
+    relationship: many_to_one
+  }
+
+  join: vacols_staff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_brieff.bfmemid} = ${vacols_staff.sattyid} ;;
+  }
+}
 
 explore: vacols_tbsched {}

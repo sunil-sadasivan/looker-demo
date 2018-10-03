@@ -1,5 +1,12 @@
 view: vacols_brieff {
-  sql_table_name: "VACOLS"."BRIEFF" ;;
+  sql_table_name: vacols.brieff ;;
+
+  dimension: _cnt {
+    description:  "AOD Status Count (if > 0, then this is indicated as AOD status)"
+    type: number
+    sql: ${TABLE}.AOD;;
+  }
+
 
   dimension_group: bf41_stat {
     description: "Date/Time Certified to BVA"
@@ -27,7 +34,14 @@ view: vacols_brieff {
     description: "Type Action"
     type: string
     sql: CASE
-        WHEN ${bfac} = 1 THEN 'Fall'
+        WHEN ${bfac} = 1 THEN 'Original'
+        WHEN ${bfac} = 2 THEN 'Supplemental'
+        WHEN ${bfac} = 3 THEN 'Post Remand'
+        WHEN ${bfac} = 4 THEN 'Reconsideration'
+        WHEN ${bfac} = 5 THEN 'Vacated'
+        WHEN ${bfac} = 6 THEN 'De Novo'
+        WHEN ${bfac} = 7 THEN 'Court Remand'
+        WHEN ${bfac} = 9 THEN 'CUE'
         ELSE ${bfac}
       END
       ;;
@@ -858,6 +872,11 @@ view: vacols_brieff {
     description: "Travel Board Ready"
     type: string
     sql: ${TABLE}."BFTBIND" ;;
+  }
+
+  measure: action_decision_count {
+    type: count
+    drill_fields: [bfdc, bfha]
   }
 
   measure: count {

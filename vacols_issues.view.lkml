@@ -113,6 +113,11 @@ view: vacols_issues {
     sql: ${TABLE}.issseq ;;
   }
 
+  measure: issdc_count {
+    type: count
+    drill_fields: [issdc]
+  }
+
   measure: count {
     type: count
     drill_fields: []
