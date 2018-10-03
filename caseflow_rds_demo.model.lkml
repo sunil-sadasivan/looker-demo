@@ -95,6 +95,27 @@ explore: attorney_case_reviews {
     sql_on: ${tasks.appeal_id} = ${appeals.id} ;;
     relationship: many_to_one
   }
+
+  join: request_issues {
+    type: left_outer
+    sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id} ;;
+    relationship: many_to_one
+  }
+
+  join: attorneys {
+    from: users
+    type: left_outer
+    sql_on: ${attorney_case_reviews.attorney_id} = ${attorneys.id} ;;
+    relationship: many_to_one
+  }
+
+  join: judges {
+    from: users
+    type: left_outer
+    sql_on: ${attorney_case_reviews.reviewing_judge_id} = ${judges.id} ;;
+    relationship: many_to_one
+
+  }
 }
 
 explore: certification_cancellations {
@@ -400,6 +421,20 @@ explore: tasks {
     sql_on: ${tasks.appeal_id} = ${appeals.id} ;;
     relationship: many_to_one
   }
+
+  join: assigned_to_user {
+    from: users
+    type: left_outer
+    sql_on: ${tasks.assigned_to_id} = ${assigned_to_user.id} ;;
+    relationship: many_to_one
+  }
+
+  join: assigned_by_user {
+    from: users
+    type: left_outer
+    sql_on: ${tasks.assigned_by_id} = ${assigned_by_user.id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: team_quotas {}
@@ -419,6 +454,7 @@ explore: user_quotas {
 }
 
 explore: users {}
+
 
 explore: versions {}
 
