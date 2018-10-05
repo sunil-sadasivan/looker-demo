@@ -170,6 +170,8 @@ explore: claims_folder_searches {
   }
 }
 
+explore: decision_issues {}
+
 explore: dispatch_tasks {
   join: appeals {
     type: left_outer
@@ -433,6 +435,16 @@ explore: tasks {
     from: users
     type: left_outer
     sql_on: ${tasks.assigned_by_id} = ${assigned_by_user.id} ;;
+    relationship: many_to_one
+  }
+
+  join: request_issues {
+    sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id};;
+    relationship: many_to_one
+  }
+
+  join: decision_issues {
+    sql_on: ${tasks.appeal_id} = ${decision_issues.request_issue_id};;
     relationship: many_to_one
   }
 }

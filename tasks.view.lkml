@@ -114,7 +114,8 @@ view: tasks {
   }
 
   measure: count {
-    type: count
+    type: count_distinct
+    sql: ${id} ;;
     drill_fields: [id, appeals.id, attorney_case_reviews.count, claim_establishments.count, judge_case_reviews.count]
   }
 }
