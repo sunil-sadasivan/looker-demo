@@ -25,6 +25,11 @@ view: vacols_issues {
     sql: ${TABLE}.isscode ;;
   }
 
+  dimension: issdc_raw {
+    type: string
+    sql: ${TABLE}.issdc ;;
+  }
+
   dimension: issdc {
     type: string
     sql: CASE
@@ -127,8 +132,31 @@ view: vacols_issues {
     drill_fields: [issdc, isscode]
   }
 
-  measure: count {
+  measure: total_count {
     type: count
     drill_fields: []
+  }
+
+  measure: case_issue_count {
+    type: number
+    sql:(case when
+            COUNT(
+                case when
+                    ${TABLE}.issdc = '1' OR
+                    ${TABLE}.issdc = '2' OR
+                    ${TABLE}.issdc = '3'
+                then 1 else null end
+            ) > 0
+        then 1 else 0 end
+          +
+          SUM(
+            case when
+                ${TABLE}.issdc = '5' OR
+                ${TABLE}.issdc = '6' OR
+                ${TABLE}.issdc = '8' OR
+                ${TABLE}.issdc = '9'
+            then 1 else 0 end
+        )
+      );;
   }
 }
