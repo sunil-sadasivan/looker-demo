@@ -263,4 +263,9 @@ view: vacols_decass {
     type: count
     drill_fields: []
   }
+
+  measure: unique_defolder_count {
+    type: count_distinct
+    drill_fields: [defolder]
+  }
 }

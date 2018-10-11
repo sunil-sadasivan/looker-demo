@@ -490,7 +490,13 @@ explore: vacols_brieff {
 
 explore: vacols_corres {}
 
-explore: vacols_decass {}
+explore: vacols_decass {
+  join: vacols_issues {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_decass.defolder} = ${vacols_issues.isskey} ;;
+  }
+}
 
 explore: vacols_hearsched {
   join: vacols_brieff {
@@ -530,6 +536,12 @@ explore: vacols_issues{
     type: left_outer
     relationship: many_to_one
     sql_on: ${vacols_brieff.bfmemid} = ${vacols_staff.sattyid} ;;
+  }
+
+  join: vacols_decass {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_issues.isskey} = ${vacols_decass.defolder} ;;
   }
 }
 
