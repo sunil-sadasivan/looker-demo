@@ -140,21 +140,21 @@ view: vacols_issues {
   measure: case_issue_count {
     type: number
     sql:(case when
-            COUNT(
+            SUM(
                 case when
-                    ${TABLE}.issdc = '1' OR
-                    ${TABLE}.issdc = '2' OR
-                    ${TABLE}.issdc = '3'
+                    ${TABLE}.issdc = '5' OR
+                    ${TABLE}.issdc = '6' OR
+                    ${TABLE}.issdc = '8' OR
+                    ${TABLE}.issdc = '9'
                 then 1 else null end
             ) > 0
         then 1 else 0 end
           +
           SUM(
             case when
-                ${TABLE}.issdc = '5' OR
-                ${TABLE}.issdc = '6' OR
-                ${TABLE}.issdc = '8' OR
-                ${TABLE}.issdc = '9'
+                ${TABLE}.issdc = '1' OR
+                ${TABLE}.issdc = '3' OR
+                ${TABLE}.issdc = '4'
             then 1 else 0 end
         )
       );;
