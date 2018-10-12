@@ -84,9 +84,18 @@ view: tasks {
     sql: ${TABLE}.started_at ;;
   }
 
-  dimension: status {
+  dimension: status_raw {
     type: string
     sql: ${TABLE}.status ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: CASE ${status_raw}
+          WHEN 'in_progress' THEN 'viewed'
+          ELSE ${status_raw}
+         END
+        ;;
   }
 
   dimension: action {
