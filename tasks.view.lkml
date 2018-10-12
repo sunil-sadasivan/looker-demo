@@ -92,7 +92,10 @@ view: tasks {
   dimension: status {
     type: string
     sql: CASE ${status_raw}
-          WHEN 'in_progress' THEN 'viewed'
+          WHEN 'assigned' THEN '1_assigned'
+          WHEN 'in_progress' THEN '2_viewed'
+          WHEN 'on_hold' THEN '3_on_hold'
+          WHEN 'completed' THEN '3_completed'
           ELSE ${status_raw}
          END
         ;;
