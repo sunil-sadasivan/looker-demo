@@ -84,23 +84,21 @@ view: tasks {
     sql: ${TABLE}.started_at ;;
   }
 
-  dimension: status {
+  dimension: status_raw {
     type: string
     sql: ${TABLE}.status ;;
   }
 
-  dimension: translated_status {
-    case: {
-      when: {
-        sql: ${status} = 'in_progress' AND ${type} = 'JudgeTask';;
-        label: "Viewed by a judge"
-      }
-      when: {
-        sql: ${status} = 'in_progress' AND ${type} = 'AttorneyTask';;
-        label: "Viewed by an attorney"
-      }
-      else: "None"
-    }
+  dimension: status {
+    type: string
+    sql: CASE ${status_raw}
+          WHEN 'assigned' THEN '1_assigned'
+          WHEN 'in_progress' THEN '2_viewed'
+          WHEN 'on_hold' THEN '3_on_hold'
+          WHEN 'completed' THEN '3_completed'
+          ELSE ${status_raw}
+         END
+        ;;
   }
 
   dimension: action {
