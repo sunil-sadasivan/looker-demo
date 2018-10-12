@@ -54,6 +54,6 @@ view: request_issues {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id, issue_category, description]
   }
 }
