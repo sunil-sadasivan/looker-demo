@@ -89,6 +89,20 @@ view: tasks {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: translated_status {
+    case: {
+      when: {
+        sql: ${status} = 'in_progress' AND ${type} = 'JudgeTask';;
+        label: "Viewed by a judge"
+      }
+      when: {
+        sql: ${status} = 'in_progress' AND ${type} = 'AttorneyTask';;
+        label: "Viewed by an attorney"
+      }
+      else: "None"
+    }
+  }
+
   dimension: action {
     type: string
     sql: ${TABLE}.action ;;

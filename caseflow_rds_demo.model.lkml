@@ -73,7 +73,17 @@ explore: appeal_views {
   }
 }
 
-explore: appeals {}
+explore: appeals {
+  join: tasks {
+    relationship: one_to_many
+    sql_on: ${tasks.appeal_id} = ${appeals.id}  ;;
+  }
+
+  join: decisions {
+    relationship: one_to_many
+    sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
+  }
+}
 
 explore: ar_internal_metadata {}
 
@@ -495,6 +505,12 @@ explore: vacols_decass {
     type: left_outer
     relationship: many_to_one
     sql_on: ${vacols_decass.defolder} = ${vacols_issues.isskey} ;;
+  }
+
+  join: vacols_staff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_decass.deatty} = ${vacols_staff.sattyid} ;;
   }
 }
 

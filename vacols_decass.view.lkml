@@ -260,8 +260,8 @@ view: vacols_decass {
   }
 
   measure: defolder_count {
-    type: count_distinct
-    sql: ${defolder} ;;
+    type: count
+    drill_fields: [defolder]
   }
 
   measure: count {
