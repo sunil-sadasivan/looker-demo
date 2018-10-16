@@ -83,6 +83,11 @@ explore: appeals {
     relationship: one_to_many
     sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
   }
+
+  join: appeal_task_status {
+    relationship: one_to_one
+    sql_on: ${appeal_task_status.appeal_id} = ${appeals.id} ;;
+  }
 }
 
 explore: ar_internal_metadata {}

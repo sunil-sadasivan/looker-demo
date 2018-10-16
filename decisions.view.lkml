@@ -17,6 +17,12 @@ view: decisions {
     sql: ${TABLE}.citation_number ;;
   }
 
+
+  dimension: bva_decision_dispatched {
+    type:  yesno
+    sql: ${citation_number} IS NOT NULL  ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
