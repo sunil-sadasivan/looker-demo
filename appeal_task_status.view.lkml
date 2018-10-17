@@ -82,27 +82,27 @@ view: appeal_task_status {
     case: {
       when: {
         sql: ${judge_task_status} is null ;;
-        label: "1_not_distributed"
+        label: "1. Not distributed"
       }
       when: {
         sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} is null;;
-        label: "2_distributed_to_judge"
+        label: "2. Distributed to judge"
       }
       when: {
         sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'assigned';;
-        label: "3_assigned_to_attorney"
+        label: "3. Assigned to attorney"
       }
       when: {
         sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'in_progress';;
-        label: "4_decision_in_progress"
+        label: "4. Decision in progress"
       }
       when: {
         sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} = 'completed';;
-        label: "5_decision_ready_for_signature"
+        label: "5. Decision ready for signature"
       }
       when: {
         sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed';;
-        label: "6_decision_signed"
+        label: "6. Decision signed"
       }
     }
   }
