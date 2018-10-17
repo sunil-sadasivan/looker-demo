@@ -77,6 +77,36 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_id;;
   }
 
+  dimension: decision_status {
+    type: string
+    case: {
+      when: {
+        sql: ${judge_task_status} is null ;;
+        label: "1_not_distributed"
+      }
+      when: {
+        sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} is null;;
+        label: "2_distributed_to_judge"
+      }
+      when: {
+        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'assigned';;
+        label: "3_assigned_to_attorney"
+      }
+      when: {
+        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'in_progress';;
+        label: "4_decision_in_progress"
+      }
+      when: {
+        sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} = 'completed';;
+        label: "5_decision_ready_for_signature"
+      }
+      when: {
+        sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed';;
+        label: "6_decision_signed"
+      }
+    }
+  }
+
   measure: num_cases_signed_by_judge {
     type: count
     drill_fields: [task_judge_name, decision_signed_by_judge]
