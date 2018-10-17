@@ -25,6 +25,13 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
             limit 1
           ) as attorney_id,
+          (select vacols.staff.sattyid
+            FROM tasks  AS tasks
+            join users on tasks.assigned_to_id = users.id
+            join vacols.staff on users.css_id = vacols.staff.sdomainid
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
+            limit 1
+          ) as judge_id,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
