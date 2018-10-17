@@ -35,6 +35,7 @@ view: appeal_task_status {
   }
 
   dimension: appeal_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -67,5 +68,23 @@ view: appeal_task_status {
   dimension: task_attorney_id {
     type: string
     sql: ${TABLE}.attorney_id;;
+  }
+
+  measure: num_cases_signed_by_judge {
+    type: count
+    drill_fields: [task_judge_name, decision_signed_by_judge]
+    filters: {
+      field: decision_signed_by_judge
+      value: "yes"
+    }
+  }
+
+  measure: num_cases_completed_by_attorney {
+    type: count
+    drill_fields: [task_attorney_name, decision_signed_by_judge]
+    filters: {
+      field: decision_signed_by_judge
+      value: "yes"
+    }
   }
 }

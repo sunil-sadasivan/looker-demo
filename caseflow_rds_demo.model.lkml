@@ -79,6 +79,12 @@ explore: appeals {
     sql_on: ${tasks.appeal_id} = ${appeals.id}  ;;
   }
 
+  join: request_issues {
+    relationship: one_to_many
+    sql_on: ${appeals.id} = ${request_issues.review_request_id} AND
+    ${request_issues.review_request_type} = 'Appeal' ;;
+  }
+
   join: decisions {
     relationship: one_to_many
     sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
