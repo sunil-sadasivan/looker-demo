@@ -52,8 +52,13 @@ view: request_issues {
     sql: ${TABLE}.review_request_type ;;
   }
 
+  measure: appeal_request_issue_count {
+    type: count
+    drill_fields: [id, review_request_id]
+  }
+
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id, issue_category, description]
   }
 }

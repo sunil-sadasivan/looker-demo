@@ -73,7 +73,28 @@ explore: appeal_views {
   }
 }
 
-explore: appeals {}
+explore: appeals {
+  join: tasks {
+    relationship: one_to_many
+    sql_on: ${tasks.appeal_id} = ${appeals.id}  ;;
+  }
+
+  join: request_issues {
+    relationship: one_to_many
+    sql_on: ${appeals.id} = ${request_issues.review_request_id} AND
+    ${request_issues.review_request_type} = 'Appeal' ;;
+  }
+
+  join: decisions {
+    relationship: one_to_many
+    sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
+  }
+
+  join: appeal_task_status {
+    relationship: one_to_one
+    sql_on: ${appeal_task_status.appeal_id} = ${appeals.id} ;;
+  }
+}
 
 explore: ar_internal_metadata {}
 
@@ -490,7 +511,19 @@ explore: vacols_brieff {
 
 explore: vacols_corres {}
 
-explore: vacols_decass {}
+explore: vacols_decass {
+  join: vacols_issues {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_decass.defolder} = ${vacols_issues.isskey} ;;
+  }
+
+  join: vacols_staff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_decass.deatty} = ${vacols_staff.sattyid} ;;
+  }
+}
 
 explore: vacols_hearsched {
   join: vacols_brieff {
@@ -530,6 +563,12 @@ explore: vacols_issues{
     type: left_outer
     relationship: many_to_one
     sql_on: ${vacols_brieff.bfmemid} = ${vacols_staff.sattyid} ;;
+  }
+
+  join: vacols_decass {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_issues.isskey} = ${vacols_decass.defolder} ;;
   }
 }
 

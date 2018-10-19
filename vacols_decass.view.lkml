@@ -259,6 +259,11 @@ view: vacols_decass {
     sql: ${TABLE}."DETREM" ;;
   }
 
+  measure: defolder_count {
+    type: count
+    drill_fields: [defolder]
+  }
+
   measure: count {
     type: count
     drill_fields: []

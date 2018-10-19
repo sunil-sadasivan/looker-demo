@@ -44,7 +44,7 @@ view: vacols_staff {
   }
 
   dimension: sattyid {
-    description: "Attorney/Judge number"
+    description: "Attorney number"
     type: string
     sql: ${TABLE}.sattyid ;;
   }
