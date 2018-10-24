@@ -22,6 +22,11 @@ view: request_issues {
     sql: ${TABLE}.issue_category ;;
   }
 
+  dimension: disposition {
+    type: string
+    sql: ${TABLE}.disposition ;;
+  }
+
   dimension_group: rating_issue_profile {
     type: time
     timeframes: [
