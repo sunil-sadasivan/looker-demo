@@ -480,6 +480,11 @@ explore: tasks {
     sql_on: ${tasks.appeal_id} = ${decision_issues.request_issue_id};;
     relationship: many_to_one
   }
+
+  join: decisions {
+    sql_on: ${tasks.appeal_id} = ${decisions.appeal_id};;
+    relationship: many_to_one
+  }
 }
 
 explore: team_quotas {}
