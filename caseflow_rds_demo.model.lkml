@@ -422,7 +422,14 @@ explore: reader_users {
   }
 }
 
-explore: request_issues {}
+explore: remand_reasons {}
+
+explore: request_issues {
+  join: remand_reasons {
+    sql_on: ${request_issues.id} = ${remand_reasons.request_issue_id};;
+    relationship: many_to_one
+  }
+}
 
 explore: schedule_periods {
   join: users {
@@ -461,7 +468,12 @@ explore: tasks {
 
   join: request_issues {
     sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id};;
-    relationship: many_to_one
+    relationship: many_to_many
+  }
+
+  join: remand_reasons {
+    sql_on: ${request_issues.id} = ${remand_reasons.request_issue_id};;
+    relationship: many_to_many
   }
 
   join: decision_issues {
