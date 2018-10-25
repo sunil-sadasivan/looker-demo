@@ -77,6 +77,11 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_id;;
   }
 
+  dimension: task_judge_id {
+    type: string
+    sql: ${TABLE}.judge_id;;
+  }
+
   dimension: decision_status {
     type: string
     case: {
