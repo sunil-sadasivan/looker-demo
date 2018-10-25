@@ -106,6 +106,12 @@ view: tasks {
     sql: ${TABLE}.action ;;
   }
 
+  dimension: appeal_type {
+    type: string
+    sql: ${TABLE}.appeal_type ;;
+  }
+
+
   dimension: type {
     type: string
     sql: ${TABLE}.type ;;

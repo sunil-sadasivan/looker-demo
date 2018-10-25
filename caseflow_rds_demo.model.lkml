@@ -76,7 +76,7 @@ explore: appeal_views {
 explore: appeals {
   join: tasks {
     relationship: one_to_many
-    sql_on: ${tasks.appeal_id} = ${appeals.id}  ;;
+    sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
   }
 
   join: request_issues {
@@ -349,6 +349,11 @@ explore: judge_case_reviews {
 }
 
 explore: legacy_appeals {
+  join: tasks {
+    relationship: one_to_many
+    sql_on: ${tasks.appeal_id} = ${legacy_appeals.id} AND ${tasks.appeal_type} = 'LegacyAppeal' ;;
+  }
+
   join: appeal_series {
     type: left_outer
     sql_on: ${legacy_appeals.appeal_series_id} = ${appeal_series.id} ;;
@@ -441,7 +446,13 @@ explore: tags {}
 explore: tasks {
   join: appeals {
     type: left_outer
-    sql_on: ${tasks.appeal_id} = ${appeals.id} ;;
+    sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal';;
+    relationship: many_to_one
+  }
+
+  join: legacy_appeals {
+    type: left_outer
+    sql_on: ${tasks.appeal_id} = ${legacy_appeals.id} AND ${tasks.appeal_type} = 'LegacyAppeal';;
     relationship: many_to_one
   }
 
