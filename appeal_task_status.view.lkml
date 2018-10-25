@@ -109,6 +109,10 @@ view: appeal_task_status {
         sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed';;
         label: "6. Decision signed"
       }
+      when: {
+        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'on_hold';;
+        label: "ON HOLD"
+      }
     }
   }
 
