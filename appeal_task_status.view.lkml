@@ -37,7 +37,12 @@ view: appeal_task_status {
             join users on tasks.assigned_to_id = users.id
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
             limit 1
-          ) as judge_name
+          ) as judge_name,
+          (select tasks.status
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask'
+            limit 1
+          ) as bva_dispatch_task_status
           from public.appeals as appeals ;;
   }
 
@@ -50,6 +55,11 @@ view: appeal_task_status {
   dimension: attorney_task_status {
     type: string
     sql: ${TABLE}.attorney_task_status;;
+  }
+
+  dimension: bva_dispatch_task_status {
+    type: string
+    sql: ${TABLE}.bva_dispatch_task_status;;
   }
 
   dimension: judge_task_status {
@@ -106,8 +116,12 @@ view: appeal_task_status {
         label: "5. Decision ready for signature"
       }
       when: {
-        sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed';;
+        sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed' and (${bva_dispatch_task_status} is null or ${bva_dispatch_task_status} != 'completed');;
         label: "6. Decision signed"
+      }
+      when: {
+        sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed' and ${bva_dispatch_task_status} = 'completed';;
+        label: "7. Decision dispatched"
       }
       when: {
         sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'on_hold';;
