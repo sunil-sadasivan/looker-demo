@@ -7,6 +7,11 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
             limit 1
           ) as attorney_task_status,
+          (select tasks.started_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            limit 1
+          ) as attorney_task_status_started_date,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
@@ -42,7 +47,12 @@ view: appeal_task_status {
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask'
             limit 1
-          ) as bva_dispatch_task_status
+          ) as bva_dispatch_task_status,
+          (select tasks.completed_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask'
+            limit 1
+          ) as bva_dispatch_task_status_completed_date
           from public.appeals as appeals ;;
   }
 
@@ -57,9 +67,19 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_task_status;;
   }
 
+  dimension: attorney_task_status_started_date {
+    type: string
+    sql: ${TABLE}.attorney_task_status_started_date;;
+  }
+
   dimension: bva_dispatch_task_status {
     type: string
     sql: ${TABLE}.bva_dispatch_task_status;;
+  }
+
+  dimension: bva_dispatch_task_status_completed_date {
+    type: string
+    sql: ${TABLE}.bva_dispatch_task_status_completed_date;;
   }
 
   dimension: judge_task_status {
