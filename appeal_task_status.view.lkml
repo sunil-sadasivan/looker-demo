@@ -92,6 +92,11 @@ view: appeal_task_status {
     sql: ${judge_task_status} = 'completed' ;;
   }
 
+  dimension: case_completed_by_attorney {
+    type: yesno
+    sql: ${attorney_task_status} = 'completed' ;;
+  }
+
   dimension: task_judge_name {
     type: string
     sql: ${TABLE}.judge_name;;
@@ -163,7 +168,7 @@ view: appeal_task_status {
     type: count
     drill_fields: [task_attorney_name, decision_signed_by_judge]
     filters: {
-      field: decision_signed_by_judge
+      field: case_completed_by_attorney
       value: "yes"
     }
   }
