@@ -67,9 +67,18 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_task_status;;
   }
 
-  dimension: attorney_task_status_started_date {
-    type: string
-    sql: ${TABLE}.attorney_task_status_started_date;;
+  dimension_group: attorney_task_status_started_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.attorney_task_status_started_at;;
   }
 
   dimension: bva_dispatch_task_status {
@@ -77,8 +86,17 @@ view: appeal_task_status {
     sql: ${TABLE}.bva_dispatch_task_status;;
   }
 
-  dimension: bva_dispatch_task_status_completed_date {
-    type: string
+  dimension_group: bva_dispatch_task_status_completed_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.bva_dispatch_task_status_completed_date;;
   }
 
