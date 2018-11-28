@@ -67,7 +67,7 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_task_status;;
   }
 
-  dimension_group: attorney_task_status_started_date {
+  dimension_group: attorney_task_status_started_at {
     type: time
     timeframes: [
       raw,
@@ -78,7 +78,7 @@ view: appeal_task_status {
       quarter,
       year
     ]
-    sql: ${TABLE}.attorney_task_status_started_at;;
+    sql: ${TABLE}.attorney_task_status_started_date;;
   }
 
   dimension: bva_dispatch_task_status {
