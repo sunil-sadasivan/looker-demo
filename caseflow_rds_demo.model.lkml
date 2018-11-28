@@ -521,6 +521,26 @@ explore: versions {}
 
 explore: veterans {}
 
+explore: people {
+  join: claimants {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${people.participant_id} = ${claimants.participant_id} ;;
+  }
+
+  join: advance_on_docket_motions {
+    type: inner
+    relationship: one_to_one
+    sql_on: ${people.id} = ${advance_on_docket_motions.person_id};;
+  }
+
+  join: appeals {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${claimants.review_request_id} = ${appeals.id} AND ${claimants.review_request_type} = 'Appeal';;
+  }
+}
+
 explore: worksheet_issues {
   join: appeals {
     type: left_outer

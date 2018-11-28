@@ -59,4 +59,12 @@ view: advance_on_docket_motions {
     type: count
     drill_fields: [id]
   }
+
+  measure: aod_count {
+    type: count
+    filters: {
+      field: granted
+      value: "true"
+    }
+  }
 }
