@@ -100,6 +100,12 @@ view: appeal_task_status {
     sql: ${TABLE}.bva_dispatch_task_status_completed_date;;
   }
 
+dimension: time_from_attorney_assignment_to_dispatch_complete {
+  description: "Dispatch Completed Date - Attorney Start Date"
+  type: number
+  sql: ${bva_dispatch_task_status_completed_at_date} - ${attorney_task_status_started_at_date};;
+}
+
   dimension: judge_task_status {
     type: string
     sql: ${TABLE}.judge_task_status;;
@@ -189,5 +195,12 @@ view: appeal_task_status {
       field: case_completed_by_attorney
       value: "yes"
     }
+  }
+
+  measure: median_attorney_start_to_dispatch_complete_days {
+    description: "Median time (in days) between dispatch complete - attorney start date"
+    type: median
+    sql: ${time_from_attorney_assignment_to_dispatch_complete};;
+    drill_fields: [appeal_id, appeal.veteran_file_number, attorney_task_status_started_at_date, bva_dispatch_task_status_completed_at_date]
   }
 }
