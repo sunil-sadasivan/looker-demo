@@ -111,6 +111,11 @@ view: tasks {
     sql: ${TABLE}.appeal_type ;;
   }
 
+  dimension: assigned_to_type {
+    type: string
+    sql: ${TABLE}.assigned_to_type ;;
+  }
+
 
   dimension: type {
     type: string
