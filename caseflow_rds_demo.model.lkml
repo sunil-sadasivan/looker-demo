@@ -381,6 +381,8 @@ explore: non_availabilities {
   }
 }
 
+explore: organizations {}
+
 explore: pg_stat_statements {
   join: users {
     type: left_outer
@@ -475,6 +477,12 @@ explore: tasks {
     type: left_outer
     sql_on: ${tasks.assigned_to_type} = 'User' AND ${tasks.assigned_by_id} = ${assigned_by_user.id} ;;
     relationship: many_to_one
+  }
+
+  join: assigned_to_organization {
+    from: organizations
+    type: left_outer
+    sql_on: ${tasks.assigned_to_type} = 'Organization' AND ${tasks.assigned_to_id} = ${assigned_to_organization.id} ;;
   }
 
   join: request_issues {
