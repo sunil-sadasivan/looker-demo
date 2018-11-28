@@ -482,7 +482,8 @@ explore: tasks {
   join: assigned_to_organization {
     from: organizations
     type: left_outer
-    sql_on: ${tasks.assigned_to_type} = 'Organization' AND ${tasks.assigned_to_id} = ${assigned_to_organization.id} ;;
+    sql_on: ${tasks.assigned_to_type} IN ('Organization', 'Vso') AND ${tasks.assigned_to_id} = ${assigned_to_organization.id} ;;
+    relationship: many_to_one
   }
 
   join: request_issues {
