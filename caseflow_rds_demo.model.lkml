@@ -74,6 +74,8 @@ explore: appeal_views {
 }
 
 explore: appeals {
+  fields: [ALL_FIELDS*, -tasks.completed_by]
+
   join: tasks {
     relationship: one_to_many
     sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
@@ -99,6 +101,8 @@ explore: appeals {
 explore: ar_internal_metadata {}
 
 explore: attorney_case_reviews {
+  fields: [ALL_FIELDS*, -tasks.completed_by]
+
   join: tasks {
     type: left_outer
     sql_on: ${attorney_case_reviews.task_id} = ${tasks.id} ;;
@@ -162,6 +166,8 @@ explore: certifications {
 }
 
 explore: claim_establishments {
+  fields: [ALL_FIELDS*, -tasks.completed_by]
+
   join: tasks {
     type: left_outer
     sql_on: ${claim_establishments.task_id} = ${tasks.id} ;;
@@ -328,6 +334,8 @@ explore: intakes {
 }
 
 explore: judge_case_reviews {
+  fields: [ALL_FIELDS*, -tasks.completed_by]
+
   join: tasks {
     type: left_outer
     sql_on: ${judge_case_reviews.task_id} = ${tasks.id} ;;
@@ -349,6 +357,8 @@ explore: judge_case_reviews {
 }
 
 explore: legacy_appeals {
+  fields: [ALL_FIELDS*, -tasks.completed_by]
+
   join: tasks {
     relationship: one_to_many
     sql_on: ${tasks.appeal_id} = ${legacy_appeals.id} AND ${tasks.appeal_type} = 'LegacyAppeal' ;;

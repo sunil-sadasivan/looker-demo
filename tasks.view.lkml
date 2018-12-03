@@ -116,6 +116,14 @@ view: tasks {
     sql: ${TABLE}.assigned_to_type ;;
   }
 
+  dimension: completed_by {
+    type: string
+    sql: CASE ${assigned_to_type}
+          WHEN 'Organization' THEN ${assigned_to_organization.name}
+          WHEN 'User' THEN ${assigned_to_user.full_name}
+         END
+        ;;
+  }
 
   dimension: type {
     type: string
