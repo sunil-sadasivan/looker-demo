@@ -439,7 +439,12 @@ explore: reader_users {
   }
 }
 
-explore: remand_reasons {}
+explore: remand_reasons {
+  join: request_issues {
+    sql_on: ${remand_reasons.request_issue_id} = ${request_issues.id};;
+    relationship: many_to_one
+  }
+}
 
 explore: request_issues {
   join: remand_reasons {
