@@ -7,12 +7,17 @@ view: remand_reasons {
   }
 
   dimension: post_aoj {
-    type: yesno
+    type: string
     sql:  ${TABLE}.post_aoj ;;
   }
 
   dimension: request_issue_id {
     type: number
     sql:  ${TABLE}.request_issue_id ;;
+  }
+
+  measure: remand_reason_code_count {
+    type: count
+    drill_fields: [code]
   }
 }
