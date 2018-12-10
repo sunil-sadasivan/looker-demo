@@ -167,7 +167,7 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
         label: "3. Assigned to attorney"
       }
       when: {
-        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'in_progress';;
+        sql: (${judge_task_status} = 'on_hold' or ${quality_review_task_status} = 'on_hold') and ${attorney_task_status} = 'in_progress';;
         label: "4. Decision in progress"
       }
       when: {
