@@ -17,6 +17,11 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
             limit 1
           ) as judge_task_status,
+          (select tasks.status
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'QualityReviewTask'
+            limit 1
+          ) as quality_review_task_status,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
@@ -106,6 +111,11 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
   sql: ${bva_dispatch_task_status_completed_at_date} - ${attorney_task_status_started_at_date};;
 }
 
+  dimension: quality_review_task_status {
+    type:  string
+    sql:  ${TABLE}.quality_review_task_status ;;
+  }
+
   dimension: judge_task_status {
     type: string
     sql: ${TABLE}.judge_task_status;;
@@ -153,7 +163,7 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
         label: "2. Distributed to judge"
       }
       when: {
-        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'assigned';;
+        sql: (${judge_task_status} = 'on_hold' or ${quality_review_task_status} = 'on_hold') and ${attorney_task_status} = 'assigned';;
         label: "3. Assigned to attorney"
       }
       when: {
