@@ -14,7 +14,7 @@ view: appeal_task_status {
           ) as attorney_task_status_started_date,
           (select tasks.status
             FROM tasks  AS tasks
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
             limit 1
           ) as judge_task_status,
           (select users.full_name
@@ -34,13 +34,13 @@ view: appeal_task_status {
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
             join vacols.staff on users.css_id = vacols.staff.sdomainid
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
             limit 1
           ) as judge_id,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeTask'
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
             limit 1
           ) as judge_name,
           (select tasks.status
