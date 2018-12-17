@@ -512,7 +512,7 @@ explore: tasks {
   }
 
   join: decision_issues {
-    sql_on: ${tasks.appeal_id} = ${decision_issues.request_issue_id};;
+    sql_on: ${tasks.appeal_id} = ${decision_issues.decision_review_id};;
     relationship: many_to_one
   }
 
