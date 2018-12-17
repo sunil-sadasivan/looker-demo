@@ -213,6 +213,16 @@ explore: dispatch_tasks {
   }
 }
 
+explore: distributions {
+  join: distributed_cases {
+    type:  left_outer
+    sql_on: ${distributions.id} = ${distributed_cases.distribution_id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: distributed_cases {}
+
 explore: docket_snapshots {}
 
 explore: docket_tracers {
