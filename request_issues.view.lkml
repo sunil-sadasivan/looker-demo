@@ -1,8 +1,13 @@
 view: request_issues {
   sql_table_name: public.request_issues ;;
 
-  dimension: parent_request_issue_id {
+  dimension: id {
     primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension: parent_request_issue_id {
     type: number
     sql: ${TABLE}.parent_request_issue_id ;;
   }
@@ -111,11 +116,6 @@ view: request_issues {
   dimension: end_product_establishment_id {
     type: number
     sql: ${TABLE}.end_product_establishment_id ;;
-  }
-
-  dimension: id {
-    type: number
-    sql: ${TABLE}.id ;;
   }
 
   dimension: ineligible_due_to_id {
