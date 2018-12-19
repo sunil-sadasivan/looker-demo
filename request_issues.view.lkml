@@ -225,6 +225,11 @@ view: request_issues {
     sql: ${TABLE}.vacols_sequence_id ;;
   }
 
+  measure: appeal_request_issue_count {
+    type: count
+    drill_fields: [id, review_request_id]
+  }
+
   measure: count {
     type: count
     drill_fields: [parent_request_issue_id]
