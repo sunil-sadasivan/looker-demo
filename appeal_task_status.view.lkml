@@ -2,6 +2,11 @@ view: appeal_task_status {
   derived_table: {
     # This returns all entries of vacols.folder, along side an AOD count (to replicate the vacols.aod_cnt() function in VACOLS)
     sql: SELECT *,
+          (select tasks.id
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id AND tasks.type = 'AttorneyTask'
+            limit 1
+          ) as attorney_task_id,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
@@ -65,6 +70,11 @@ view: appeal_task_status {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+  }
+
+  dimension: attorney_task_id {
+    type: number
+    sql: ${TABLE}.attorney_task_id;;
   }
 
   dimension: attorney_task_status {
@@ -207,9 +217,25 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
     }
   }
 
-  measure: task_count {
+  measure: attorney_completed_task_count {
     type: count
-    drill_fields: [tasks.id]
+    filters: {
+      field: attorney_task_status
+      value: "completed"
+    }
+    drill_fields: [attorney_task_id]
+  }
+
+  measure: attorney_decisions_drafed_count {
+    type: count
+    filters: {
+      field: attorney_task_status
+      value: "completed"
+    }
+    filters: {
+      field: attorney_task_status
+      value: "completed"
+    }
   }
 
   measure: median_attorney_start_to_dispatch_complete_days {
