@@ -95,7 +95,7 @@ explore: appeals {
 
   join: decision_documents {
     relationship: one_to_many
-    sql_on: ${decision_documents.appeal_id}.appeal_id} = ${appeals.id} ;;
+    sql_on: ${decision_documents.appeal_id} = ${appeals.id} ;;
   }
 
   join: appeal_task_status {
