@@ -207,6 +207,11 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
     }
   }
 
+  measure: task_count {
+    type: count
+    drill_fields: [tasks.id]
+  }
+
   measure: median_attorney_start_to_dispatch_complete_days {
     description: "Median time (in days) between dispatch complete - attorney start date"
     type: median
