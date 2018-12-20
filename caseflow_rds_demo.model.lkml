@@ -93,9 +93,9 @@ explore: appeals {
       ${decision_issues.decision_review_type} = 'Appeal' ;;
   }
 
-  join: decisions {
+  join: decision_documents {
     relationship: one_to_many
-    sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
+    sql_on: ${decision_documents.appeal_id}.appeal_id} = ${appeals.id} ;;
   }
 
   join: appeal_task_status {
@@ -532,8 +532,8 @@ explore: tasks {
     relationship: many_to_one
   }
 
-  join: decisions {
-    sql_on: ${tasks.appeal_id} = ${decisions.appeal_id};;
+  join: decision_documents {
+    sql_on: ${tasks.appeal_id} = ${decision_documents.appeal_id};;
     relationship: many_to_one
   }
 }

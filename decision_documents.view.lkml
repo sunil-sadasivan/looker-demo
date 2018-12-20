@@ -1,5 +1,5 @@
-view: decisions {
-  sql_table_name: public.decisions ;;
+view: decision_documents {
+  sql_table_name: public.decision_documents ;;
 
   dimension: id {
     primary_key: yes
@@ -15,12 +15,6 @@ view: decisions {
   dimension: citation_number {
     type: string
     sql: ${TABLE}.citation_number ;;
-  }
-
-
-  dimension: bva_decision_dispatched {
-    type:  yesno
-    sql: ${citation_number} IS NOT NULL  ;;
   }
 
   dimension_group: created {
