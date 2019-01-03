@@ -70,6 +70,15 @@ view: decision_documents {
     sql: ${TABLE}.updated_at ;;
   }
 
+  measure: bva_decision_dispatched_count {
+    type: count
+    filters: {
+      field: bva_decision_dispatched
+      value: "yes"
+    }
+    drill_fields: [id]
+  }
+
   measure: count {
     type: count
     drill_fields: [id]

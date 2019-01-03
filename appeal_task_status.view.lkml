@@ -223,7 +223,7 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
       field: attorney_task_status
       value: "completed"
     }
-    drill_fields: [attorney_task_id]
+    drill_fields: [attorney_task_id, decision_status]
   }
 
   measure: attorney_decisions_drafed_count {
