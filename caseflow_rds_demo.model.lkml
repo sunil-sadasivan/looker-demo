@@ -467,6 +467,11 @@ explore: request_issues {
     sql_on: ${request_issues.id} = ${remand_reasons.request_issue_id};;
     relationship: many_to_one
   }
+
+  join: request_issues_by_previous_adjudication {
+    relationship: one_to_one
+    sql_on: ${request_issues.id} = ${request_issues_by_previous_adjudication.request_issue_id} ;;
+  }
 }
 
 explore: schedule_periods {
