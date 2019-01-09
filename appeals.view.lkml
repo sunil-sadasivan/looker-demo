@@ -41,6 +41,11 @@ view: appeals {
     sql: ${TABLE}.receipt_date ;;
   }
 
+  dimension: docket_number {
+    type: string
+    sql: to_char(${receipt_date}, 'yymmdd') || '-' || ${id} ;;
+  }
+
   dimension: uuid {
     type: string
     sql: ${TABLE}.uuid ;;
