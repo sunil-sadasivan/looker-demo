@@ -13,6 +13,10 @@ datagroup: caseflow_rds_demo_default_datagroup {
 
 persist_with: caseflow_rds_demo_default_datagroup
 
+explore: hearing_days {}
+
+explore: legacy_hearings {}
+
 explore: allocations {
   join: schedule_periods {
     type: left_outer
