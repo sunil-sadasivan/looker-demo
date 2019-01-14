@@ -12,6 +12,27 @@ view: veterans {
     sql: ${TABLE}.file_number ;;
   }
 
+  dimension: first_name {
+    type: string
+    sql: ${TABLE}.first_name ;;
+  }
+
+  dimension: last_name {
+    type: string
+    sql: ${TABLE}.last_name ;;
+  }
+
+  dimension: middle_name {
+    type: string
+    sql: ${TABLE}.middle_name ;;
+  }
+
+
+  dimension: name_suffix {
+    type: string
+    sql: ${TABLE}.name_suffix ;;
+  }
+
   dimension: participant_id {
     type: string
     sql: ${TABLE}.participant_id ;;
