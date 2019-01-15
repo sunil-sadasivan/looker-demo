@@ -90,6 +90,11 @@ explore: appeals {
     sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
   }
 
+  join: task_timers {
+    relationship: one_to_one
+    sql_on: ${task_timers.task_id} =  ${tasks.id};;
+  }
+
   join: request_issues {
     relationship: one_to_many
     sql_on: ${appeals.id} = ${request_issues.review_request_id} AND
