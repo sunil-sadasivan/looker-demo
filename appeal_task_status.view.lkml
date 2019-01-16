@@ -14,9 +14,29 @@ view: appeal_task_status {
           ) as attorney_task_status_started_date,
           (select tasks.status
             FROM tasks  AS tasks
-            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeAssignTask'
             limit 1
-          ) as judge_task_status,
+          ) as judge_assign_task_status,
+          (select tasks.started_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeAssignTask'
+            limit 1
+          ) as judge_assign_task_status_started_date,
+          (select tasks.status
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask'
+            limit 1
+          ) as judge_review_task_status,
+          (select tasks.started_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask'
+            limit 1
+          ) as judge_review_task_status_started_date,
+          (select tasks.completed_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask'
+            limit 1
+          ) as judge_review_task_status_completed_date,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'QualityReviewTask'
@@ -39,15 +59,23 @@ view: appeal_task_status {
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
             join vacols.staff on users.css_id = vacols.staff.sdomainid
-            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
             limit 1
           ) as judge_id,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
-            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeReviewTask')
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
             limit 1
           ) as judge_name,
+          (select tasks.status
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
+            limit 1
+          ) as judge_task_status,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask'
@@ -86,6 +114,72 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_task_status_started_date;;
   }
 
+  dimension: judge_assign_task_status {
+    type: string
+    sql: ${TABLE}.judge_assign_task_status ;;
+  }
+
+  dimension_group: judge_assign_task_status_started_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.judge_assign_task_status_started_date;;
+  }
+
+  dimension_group: judge_assign_task_status_completed_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.judge_assign_task_status_completed_date;;
+  }
+
+  dimension: judge_review_task_status {
+    type: string
+    sql: ${TABLE}.judge_review_task_status ;;
+  }
+
+  dimension_group: judge_review_task_status_started_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.judge_review_task_status_started_date;;
+  }
+
+  dimension_group: judge_review_task_status_completed_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.judge_review_task_status_completed_date;;
+  }
+
   dimension: bva_dispatch_task_status {
     type: string
     sql: ${TABLE}.bva_dispatch_task_status;;
@@ -105,11 +199,23 @@ view: appeal_task_status {
     sql: ${TABLE}.bva_dispatch_task_status_completed_date;;
   }
 
-dimension: time_from_attorney_assignment_to_dispatch_complete {
-  description: "Dispatch Completed Date - Attorney Start Date"
-  type: number
-  sql: ${bva_dispatch_task_status_completed_at_date} - ${attorney_task_status_started_at_date};;
-}
+  dimension: time_from_attorney_assignment_to_dispatch_complete {
+    description: "Dispatch Completed Date - Attorney Start Date"
+    type: number
+    sql: ${bva_dispatch_task_status_completed_at_date} - ${attorney_task_status_started_at_date};;
+  }
+
+  dimension: time_from_judge_reviewing_to_signing_complete {
+    description: "JudgeDecisionReviewTask Completion Date - JudgeDecisionReviewTask Started Date"
+    type: number
+    sql: ${judge_review_task_status_completed_at_date} - ${judge_review_task_status_started_at_date};;
+  }
+
+  dimension: time_from_judge_signing_to_dispatch_complete {
+    description: "Dispatch Completed Date - JudgeDecisionReviewTask Completion Date"
+    type: number
+    sql: ${bva_dispatch_task_status_completed_at_date} - ${judge_review_task_status_completed_at_date};;
+  }
 
   dimension: quality_review_task_status {
     type:  string
@@ -211,6 +317,20 @@ dimension: time_from_attorney_assignment_to_dispatch_complete {
     description: "Median time (in days) between dispatch complete - attorney start date"
     type: median
     sql: ${time_from_attorney_assignment_to_dispatch_complete};;
+    drill_fields: [appeal_id, appeal.veteran_file_number, attorney_task_status_started_at_date, bva_dispatch_task_status_completed_at_date]
+  }
+
+  measure: median_judge_complete_to_dispatch_complete_days {
+    description: "Median time (in days) between judge signing decision to dispatch complete"
+    type: median
+    sql: ${time_from_judge_signing_to_dispatch_complete};;
+    drill_fields: [appeal_id, appeal.veteran_file_number, attorney_task_status_started_at_date, bva_dispatch_task_status_completed_at_date]
+  }
+
+  measure: median_judge_review_to_complete_days {
+    description: "Median time (in days) between judge reviewing to signing a decision"
+    type: median
+    sql: ${time_from_judge_reviewing_to_signing_complete};;
     drill_fields: [appeal_id, appeal.veteran_file_number, attorney_task_status_started_at_date, bva_dispatch_task_status_completed_at_date]
   }
 }
