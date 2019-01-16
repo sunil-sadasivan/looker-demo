@@ -41,6 +41,7 @@ view: vacols_brieff {
         WHEN ${bfac} = 5 THEN 'Vacated'
         WHEN ${bfac} = 6 THEN 'De Novo'
         WHEN ${bfac} = 7 THEN 'Court Remand'
+        WHEN ${bfac} = 8 THEN 'Designation of Record'
         WHEN ${bfac} = 9 THEN 'CUE'
         ELSE ${bfac}
       END
