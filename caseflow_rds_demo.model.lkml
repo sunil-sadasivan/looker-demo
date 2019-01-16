@@ -247,7 +247,13 @@ explore: distributions {
   }
 }
 
-explore: distributed_cases {}
+explore: distributed_cases {
+  join: distributions {
+    type: left_outer
+    sql_on: ${distributed_cases.distribution_id} = ${distributions.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: docket_snapshots {}
 

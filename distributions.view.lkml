@@ -45,6 +45,21 @@ view: distributions {
     sql: ${TABLE}.statistics ;;
   }
 
+  dimension: priority_case_count {
+    type: number
+    sql: json_extract_path_text(${statistics}, 'priority_count') ;;
+  }
+
+  dimension: total_case_batch_size {
+    type: number
+    sql: json_extract_path_text(${statistics}, 'total_batch_size') ;;
+  }
+
+  dimension: case_batch_size {
+    type: number
+    sql: json_extract_path_text(${statistics}, 'batch_size') ;;
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
