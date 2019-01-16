@@ -80,9 +80,19 @@ explore: appeal_views {
 explore: appeals {
   fields: [ALL_FIELDS*, -tasks.completed_by]
 
+  join: veterans {
+    relationship: one_to_one
+    sql_on: ${appeals.veteran_file_number} = ${veterans.file_number} ;;
+  }
+
   join: tasks {
     relationship: one_to_many
     sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
+  }
+
+  join: task_timers {
+    relationship: one_to_one
+    sql_on: ${task_timers.task_id} =  ${tasks.id};;
   }
 
   join: request_issues {
