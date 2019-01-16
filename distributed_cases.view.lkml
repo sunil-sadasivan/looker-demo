@@ -57,6 +57,11 @@ view: distributed_cases {
     sql: ${TABLE}.ready_at ;;
   }
 
+  dimension: priority_wait_time {
+    type: number
+    sql: DATEDIFF(days, DATE(${ready_date}), ${distributions.completed_date}) ;;
+  }
+
   measure: judge_priority_count {
     type: count
     drill_fields: [distributions.judge_id, distribution_id]
@@ -64,6 +69,11 @@ view: distributed_cases {
       field: priority
       value: "true"
     }
+  }
+
+  measure: average_priority_case_wait {
+    type: average
+    sql: ${priority_wait_time} ;;
   }
 
   measure: count {
