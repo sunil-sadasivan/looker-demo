@@ -229,6 +229,12 @@ explore: distributions {
     sql_on: ${distributions.id} = ${distributed_cases.distribution_id} ;;
     relationship: one_to_many
   }
+
+  join: vacols_staff {
+    type:  left_outer
+    sql_on: ${distributions.judge_id} = ${vacols_staff.sattyid} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: distributed_cases {}
