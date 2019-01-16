@@ -5,32 +5,38 @@ view: appeal_task_status {
           (select tasks.id
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id AND tasks.type = 'AttorneyTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_id,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status,
           (select tasks.started_at
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status_started_date,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
             limit 1
           ) as judge_task_status,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'QualityReviewTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as quality_review_task_status,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as attorney_name,
           (select vacols.staff.sattyid
@@ -38,6 +44,7 @@ view: appeal_task_status {
             join users on tasks.assigned_to_id = users.id
             join vacols.staff on users.css_id = vacols.staff.sdomainid
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            order by tasks.assigned_at desc
             limit 1
           ) as attorney_id,
           (select vacols.staff.sattyid
@@ -45,12 +52,14 @@ view: appeal_task_status {
             join users on tasks.assigned_to_id = users.id
             join vacols.staff on users.css_id = vacols.staff.sdomainid
             where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
             limit 1
           ) as judge_id,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
             where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
+            order by tasks.assigned_at desc
             limit 1
           ) as judge_name,
           (select tasks.status
