@@ -136,6 +136,20 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_task_status_started_date;;
   }
 
+  dimension_group: attorney_task_status_completed_at{
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.attorney_task_status_completed_date;;
+  }
+
   dimension: judge_assign_task_status {
     type: string
     sql: ${TABLE}.judge_assign_task_status ;;
@@ -225,6 +239,12 @@ view: appeal_task_status {
     description: "Dispatch Completed Date - Attorney Start Date"
     type: number
     sql: ${bva_dispatch_task_status_completed_at_date} - ${attorney_task_status_started_at_date};;
+  }
+
+  dimension: time_from_attorney_complete_to_signing_complete {
+    description: "JudgeDecisionReviewTask Completion Date - Attorney Completed Date"
+    type: number
+    sql: ${judge_review_task_status_completed_at_date} - ${attorney_task_status_completed_at_date};;
   }
 
   dimension: time_from_judge_reviewing_to_signing_complete {
