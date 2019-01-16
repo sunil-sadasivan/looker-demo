@@ -20,6 +20,12 @@ view: appeal_task_status {
             order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status_started_date,
+          (select tasks.completed_at
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
+            order by tasks.completed_at desc
+            limit 1
+          ) as attorney_task_status_completed_date,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeAssignTask'
