@@ -1,8 +1,13 @@
 view: request_issues {
   sql_table_name: public.request_issues ;;
 
-  dimension: parent_request_issue_id {
+  dimension: id {
     primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension: parent_request_issue_id {
     type: number
     sql: ${TABLE}.parent_request_issue_id ;;
   }
@@ -113,11 +118,6 @@ view: request_issues {
     sql: ${TABLE}.end_product_establishment_id ;;
   }
 
-  dimension: id {
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-
   dimension: ineligible_due_to_id {
     type: number
     sql: ${TABLE}.ineligible_due_to_id ;;
@@ -223,6 +223,11 @@ view: request_issues {
   dimension: vacols_sequence_id {
     type: string
     sql: ${TABLE}.vacols_sequence_id ;;
+  }
+
+  measure: appeal_request_issue_count {
+    type: count
+    drill_fields: [id, review_request_id]
   }
 
   measure: count {

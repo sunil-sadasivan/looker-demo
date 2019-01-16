@@ -57,6 +57,15 @@ view: distributed_cases {
     sql: ${TABLE}.ready_at ;;
   }
 
+  measure: judge_priority_count {
+    type: count
+    drill_fields: [distributions.judge_id, distribution_id]
+    filters: {
+      field: priority
+      value: "true"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, distributions.id]

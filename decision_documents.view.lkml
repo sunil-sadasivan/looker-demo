@@ -1,5 +1,5 @@
-view: decisions {
-  sql_table_name: public.decisions ;;
+view: decision_documents {
+  sql_table_name: public.decision_documents ;;
 
   dimension: id {
     primary_key: yes
@@ -16,7 +16,6 @@ view: decisions {
     type: string
     sql: ${TABLE}.citation_number ;;
   }
-
 
   dimension: bva_decision_dispatched {
     type:  yesno
@@ -69,6 +68,77 @@ view: decisions {
       year
     ]
     sql: ${TABLE}.updated_at ;;
+  }
+
+  dimension_group: submitted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.submitted_at ;;
+  }
+
+  dimension_group: attempted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.attempted_at ;;
+  }
+
+  dimension_group: processed {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.processed_at ;;
+  }
+
+
+  dimension: error {
+    type: string
+    sql: ${TABLE}.error ;;
+  }
+
+  dimension_group: uploaded_to_vbms {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.uploaded_to_vbms_at ;;
+  }
+
+  measure: bva_decision_dispatched_count {
+    type: count
+    filters: {
+      field: bva_decision_dispatched
+      value: "yes"
+    }
+    drill_fields: [id]
   }
 
   measure: count {

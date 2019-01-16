@@ -75,6 +75,11 @@ view: decision_issues {
     sql: ${TABLE}.rating_issue_reference_id ;;
   }
 
+  measure: appeal_decision_issue_count {
+    type: count
+    drill_fields: [id, decision_review_id]
+  }
+
   measure: count {
     type: count
     drill_fields: [id]

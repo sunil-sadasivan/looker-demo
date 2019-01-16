@@ -13,6 +13,10 @@ datagroup: caseflow_rds_demo_default_datagroup {
 
 persist_with: caseflow_rds_demo_default_datagroup
 
+explore: hearing_days {}
+
+explore: legacy_hearings {}
+
 explore: allocations {
   join: schedule_periods {
     type: left_outer
@@ -76,9 +80,19 @@ explore: appeal_views {
 explore: appeals {
   fields: [ALL_FIELDS*, -tasks.completed_by]
 
+  join: veterans {
+    relationship: one_to_one
+    sql_on: ${appeals.veteran_file_number} = ${veterans.file_number} ;;
+  }
+
   join: tasks {
     relationship: one_to_many
     sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
+  }
+
+  join: task_timers {
+    relationship: one_to_one
+    sql_on: ${task_timers.task_id} =  ${tasks.id};;
   }
 
   join: request_issues {
@@ -87,9 +101,15 @@ explore: appeals {
     ${request_issues.review_request_type} = 'Appeal' ;;
   }
 
-  join: decisions {
+  join: decision_issues {
     relationship: one_to_many
-    sql_on: ${decisions.appeal_id} = ${appeals.id} ;;
+    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} AND
+      ${decision_issues.decision_review_type} = 'Appeal' ;;
+  }
+
+  join: decision_documents {
+    relationship: one_to_many
+    sql_on: ${decision_documents.appeal_id} = ${appeals.id} ;;
   }
 
   join: appeal_task_status {
@@ -218,6 +238,12 @@ explore: distributions {
     type:  left_outer
     sql_on: ${distributions.id} = ${distributed_cases.distribution_id} ;;
     relationship: one_to_many
+  }
+
+  join: vacols_staff {
+    type:  left_outer
+    sql_on: ${distributions.judge_id} = ${vacols_staff.sattyid} ;;
+    relationship: many_to_one
   }
 }
 
@@ -461,6 +487,11 @@ explore: request_issues {
     sql_on: ${request_issues.id} = ${remand_reasons.request_issue_id};;
     relationship: many_to_one
   }
+
+  join: request_issues_by_previous_adjudication {
+    relationship: one_to_one
+    sql_on: ${request_issues.id} = ${request_issues_by_previous_adjudication.request_issue_id} ;;
+  }
 }
 
 explore: schedule_periods {
@@ -526,8 +557,8 @@ explore: tasks {
     relationship: many_to_one
   }
 
-  join: decisions {
-    sql_on: ${tasks.appeal_id} = ${decisions.appeal_id};;
+  join: decision_documents {
+    sql_on: ${tasks.appeal_id} = ${decision_documents.appeal_id};;
     relationship: many_to_one
   }
 }

@@ -68,4 +68,11 @@ view: distributions {
     type: count
     drill_fields: [id, distributed_cases.count]
   }
+
+  measure: largest_docket_index {
+    type:  max
+    sql: (SELECT MAX(distributed_cases.docket_index)
+     FROM distributed_cases
+     WHERE distributed_cases.distribution_id = ${TABLE}.id);;
+  }
 }
