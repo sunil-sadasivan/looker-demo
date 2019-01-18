@@ -83,48 +83,4 @@ view: distributions {
     type: count
     drill_fields: [id, distributed_cases.count]
   }
-
-  measure: max_docket_index {
-    type:  max
-    sql: (SELECT MAX(distributed_cases.docket_index)
-     FROM distributed_cases
-     WHERE distributed_cases.distribution_id = ${TABLE}.id);;
-  }
-
-  measure: max_nonpriority_not_genpop_docket_index {
-    type:  max
-    sql: (SELECT MAX(distributed_cases.docket_index)
-           FROM distributed_cases
-           WHERE distributed_cases.distribution_id = ${TABLE}.id and distributed_cases.priority='false' and distributed_cases.genpop = 'false');;
-  }
-
-  measure: max_nonpriority_any_docket_index {
-    type:  max
-    sql: (SELECT MAX(distributed_cases.docket_index)
-           FROM distributed_cases
-           WHERE distributed_cases.distribution_id = ${TABLE}.id and distributed_cases.priority='false' and distributed_cases.genpop_query='any');;
-  }
-
-#   measure: max_nonpriority_any_docket_index_case_id {
-#     type:  max
-#     sql: (SELECT MAX(distributed_cases.docket_index)
-#            FROM distributed_cases
-#            WHERE distributed_cases.distribution_id = ${TABLE}.id and distributed_cases.priority='false' and distributed_cases.genpop_query='any');;
-#   }
-
-#   measure: is_max_nonpriority_any_docket_index_genpop {
-#     type: string
-#     sql: (SELECT (distributed_cases.genpop)
-#            FROM distributed_cases
-#            WHERE distributed_cases.distribution_id = ${TABLE}.id and distributed_cases.priority='false' and distributed_cases.genpop_query='any');;
-#   }
-
-  measure: number_of_nonpriority_not_genpop_cases {
-    type: number
-    sql: (SELECT count(*)
-           FROM distributed_cases
-           WHERE distributed_cases.distribution_id = ${TABLE}.id and distributed_cases.priority='false' and distributed_cases.genpop = 'false');;
-  }
-
-
 }
