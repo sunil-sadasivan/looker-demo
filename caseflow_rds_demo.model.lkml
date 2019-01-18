@@ -77,6 +77,8 @@ explore: appeal_views {
   }
 }
 
+explore: average_time_for_decision {}
+
 explore: appeals {
   fields: [ALL_FIELDS*, -tasks.completed_by]
 
@@ -113,6 +115,18 @@ explore: appeals {
   }
 
   join: appeal_task_status {
+    relationship: one_to_one
+    sql_on: ${appeal_task_status.appeal_id} = ${appeals.id} ;;
+  }
+}
+
+explore: appeal_task_status {
+  join: decision_documents {
+    relationship: one_to_many
+    sql_on: ${decision_documents.appeal_id} = ${appeal_task_status.appeal_id} ;;
+  }
+
+  join: appeals {
     relationship: one_to_one
     sql_on: ${appeal_task_status.appeal_id} = ${appeals.id} ;;
   }
