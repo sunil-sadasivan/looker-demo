@@ -380,6 +380,7 @@ view: appeal_task_status {
   measure: average_days_to_complete {
     type: average
     sql: DATEDIFF(days, appeals.established_at, decision_documents.decision_date);;
+    value_format: "0"
   }
 
 
