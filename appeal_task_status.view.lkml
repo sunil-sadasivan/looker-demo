@@ -376,6 +376,13 @@ view: appeal_task_status {
     }
   }
 
+
+  measure: average_days_to_complete {
+    type: average
+    sql: DATEDIFF(days, appeals.established_at, decision_documents.decision_date);;
+  }
+
+
   measure: median_attorney_start_to_dispatch_complete_days {
     description: "Median time (in days) between dispatch complete - attorney start date"
     type: median
