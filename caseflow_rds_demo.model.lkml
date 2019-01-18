@@ -281,7 +281,7 @@ explore: distributed_cases {
   }
 
   join: max_nonpriority_not_genpop_docket_index {
-    type:  inner
+    type:  left_outer
     sql_on: ${distributed_cases_not_genpop.distribution_id} = ${max_nonpriority_not_genpop_docket_index.distribution_id} and ${distributed_cases_not_genpop.docket_index} = ${max_nonpriority_not_genpop_docket_index.docket_index} ;;
     relationship: one_to_one
   }
@@ -300,6 +300,8 @@ explore: distributed_cases {
 
 
 }
+
+explore: max_nonpriority_not_genpop_docket_index {}
 
 explore: docket_snapshots {}
 
