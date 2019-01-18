@@ -26,6 +26,10 @@ view: distributed_cases_any {
         field: distributed_cases.genpop_query
         value: "any"
       }
+      filters: {
+        field: distributed_cases.priority
+        value: "false"
+      }
     }
   }
   dimension: case_id {}

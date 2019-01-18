@@ -26,6 +26,10 @@ view: distributed_cases_not_genpop {
         field: distributed_cases.genpop_query
         value: "not^_genpop"
       }
+      filters: {
+        field: distributed_cases.priority
+        value: "false"
+      }
     }
   }
   dimension: case_id {}
