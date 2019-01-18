@@ -275,8 +275,8 @@ explore: distributed_cases {
   }
 
   join: distributed_cases_not_genpop {
-    type: left_outer
-    sql_on: ${distributed_cases_not_genpop.distribution_id} = ${distributed_cases.distribution_id} ;;
+    type: inner
+    sql_on: ${distributed_cases_not_genpop.distribution_id} = ${distributions.id} ;;
     relationship: one_to_one
   }
 

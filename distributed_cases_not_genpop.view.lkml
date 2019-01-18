@@ -1,79 +1,83 @@
-# If necessary, uncomment the line below to include explore_source.
-# include: "caseflow_rds_demo.model.lkml"
-
 view: distributed_cases_not_genpop {
-  derived_table: {
-    explore_source: distributed_cases {
-      column: case_id {}
-      column: docket_index {}
-      column: docket {}
-      column: distribution_id {}
-      column: id {}
-      column: priority {}
-      column: priority_wait_time {}
-      column: ready_date {}
-      column: ready_month {}
-      column: ready_quarter {}
-      column: ready_time {}
-      column: ready_week {}
-      column: ready_year {}
-      column: average_priority_case_wait {}
-      column: count {}
-      column: judge_priority_count {}
-      column: genpop_query {}
-      column: genpop {}
-      filters: {
-        field: distributed_cases.genpop_query
-        value: "not^_genpop"
-      }
-      filters: {
-        field: distributed_cases.priority
-        value: "false"
-      }
-    }
-  }
-  dimension: case_id {}
-  dimension: docket_index {
+  sql_table_name: public.distributed_cases ;;
+
+  dimension: id {
+    primary_key: yes
     type: number
+    sql: ${TABLE}.id ;;
   }
-  dimension: docket {}
+
+  dimension: case_id {
+    type: string
+    sql: ${TABLE}.case_id ;;
+  }
+
   dimension: distribution_id {
     type: number
+    # hidden: yes
+    sql: ${TABLE}.distribution_id ;;
   }
-  dimension: id {
+
+  dimension: docket {
+    type: string
+    sql: ${TABLE}.docket ;;
+  }
+
+  dimension: docket_index {
     type: number
+    sql: ${TABLE}.docket_index ;;
   }
-  dimension: priority {}
+
+  dimension: genpop {
+    type: string
+    sql: ${TABLE}.genpop ;;
+  }
+
+  dimension: genpop_query {
+    type: string
+    sql: ${TABLE}.genpop_query ;;
+  }
+
+  dimension: priority {
+    type: string
+    sql: ${TABLE}.priority ;;
+  }
+
+  dimension_group: ready {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.ready_at ;;
+  }
+
   dimension: priority_wait_time {
     type: number
+    sql: DATEDIFF(days, DATE(${ready_date}), ${distributions.completed_date}) ;;
   }
-  dimension: ready_date {
-    type: date_date
+
+  measure: judge_priority_count {
+    type: count
+    drill_fields: [distributions.judge_id, distribution_id]
+    filters: {
+      field: priority
+      value: "true"
+    }
   }
-  dimension: ready_month {
-    type: date_month
+
+  measure: average_priority_case_wait {
+    type: average
+    sql: ${priority_wait_time} ;;
   }
-  dimension: ready_quarter {
-    type: date_quarter
+
+  measure: count {
+    type: count
+    drill_fields: [id, distributions.id]
   }
-  dimension: ready_time {
-    type: date_time
-  }
-  dimension: ready_week {
-    type: date_week
-  }
-  dimension: ready_year {
-    type: date_year
-  }
-  dimension: average_priority_case_wait {
-    type: number
-  }
-  dimension: count {
-    type: number
-  }
-  dimension: judge_priority_count {
-    type: number
-  }
-  dimension: genpop_query {}
-  dimension: genpop {}
 }
