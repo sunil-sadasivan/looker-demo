@@ -274,13 +274,13 @@ explore: distributions {
 
   join: vacols_folder_not_genpop_cases {
     type:  left_outer
-    sql_on: ${max_nonpriority_not_genpop_docket_index.distribution_case_appeal_id} = ${vacols_folder_not_genpop_cases.ticknum} ;;
+    sql_on: ${max_nonpriority_not_genpop_docket_index.distribution_case_folder_id} = ${vacols_folder_not_genpop_cases.ticknum} ;;
     relationship: one_to_one
   }
 
   join: vacols_folder_any_cases {
     type:  left_outer
-    sql_on: ${max_nonpriority_any_docket_index.distribution_case_appeal_id} = ${vacols_folder_any_cases.ticknum} ;;
+    sql_on: ${max_nonpriority_any_docket_index.distribution_case_folder_id} = ${vacols_folder_any_cases.ticknum} ;;
     relationship: one_to_one
   }
 

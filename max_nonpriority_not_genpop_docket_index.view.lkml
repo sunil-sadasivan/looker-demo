@@ -23,7 +23,7 @@ view: max_nonpriority_not_genpop_docket_index {
     sql: ${TABLE}.id;;
   }
 
-  dimension: distribution_case_appeal_id {
+  dimension: distribution_case_folder_id {
     type: number
     sql: ${TABLE}.case_id;;
   }
