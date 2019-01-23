@@ -71,7 +71,7 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask'
             order by tasks.assigned_at desc
             limit 1
-          ) as attorney_id,
+          ) as vacols_attorney_id,
           (select vacols.staff.sattyid
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
@@ -79,7 +79,7 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type IN ('JudgeAssignTask', 'JudgeDecisionReviewTask')
             order by tasks.assigned_at desc
             limit 1
-          ) as judge_id,
+          ) as vacols_judge_id,
           (select users.full_name
             FROM tasks  AS tasks
             join users on tasks.assigned_to_id = users.id
@@ -289,14 +289,14 @@ view: appeal_task_status {
     sql: ${TABLE}.attorney_name;;
   }
 
-  dimension: task_attorney_id {
+  dimension: vacols_attorney_id {
     type: string
-    sql: ${TABLE}.attorney_id;;
+    sql: ${TABLE}.vacols_attorney_id;;
   }
 
-  dimension: task_judge_id {
+  dimension: vacols_judge_id {
     type: string
-    sql: ${TABLE}.judge_id;;
+    sql: ${TABLE}.vacols_judge_id;;
   }
 
   dimension: decision_status {
