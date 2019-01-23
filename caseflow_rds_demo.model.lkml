@@ -271,6 +271,19 @@ explore: distributions {
     sql_on: ${max_nonpriority_any_docket_index.distribution_id} = ${distributions.id} ;;
     relationship: one_to_one
   }
+
+  join: vacols_folder_not_genpop_cases {
+    type:  left_outer
+    sql_on: ${max_nonpriority_not_genpop_docket_index.distribution_case_appeal_id} = ${vacols_folder_not_genpop_cases.ticknum} ;;
+    relationship: one_to_one
+  }
+
+  join: vacols_folder_any_cases {
+    type:  left_outer
+    sql_on: ${max_nonpriority_any_docket_index.distribution_case_appeal_id} = ${vacols_folder_any_cases.ticknum} ;;
+    relationship: one_to_one
+  }
+
 }
 
 explore: distributed_cases {
@@ -287,7 +300,13 @@ explore: distributed_cases {
   }
 }
 
-explore: max_nonpriority_not_genpop_docket_index {}
+explore: max_nonpriority_not_genpop_docket_index {
+  join: vacols_folder {
+    type:  inner
+    sql_on: ${max_nonpriority_not_genpop_docket_index.distribution_case_id} = ${vacols_folder.ticknum} ;;
+    relationship: one_to_one
+  }
+}
 
 explore: docket_snapshots {}
 

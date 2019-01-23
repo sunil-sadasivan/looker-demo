@@ -1,6 +1,6 @@
 view: max_nonpriority_any_docket_index {
   derived_table: {
-    sql: select distinct d_id, coalesce, id from (select t.d_id, t.coalesce, m.id from(SELECT distributions.id as d_id, coalesce(max(distributed_cases.docket_index),0)
+    sql: select distinct d_id, coalesce, id, case_id from (select t.d_id, t.coalesce, m.id, m.case_id from(SELECT distributions.id as d_id, coalesce(max(distributed_cases.docket_index),0)
            FROM public.distributions as distributions
            LEFT OUTER JOIN public.distributed_cases as distributed_cases ON (distributed_cases.distribution_id = distributions.id
            and distributed_cases.priority='false' and distributed_cases.genpop_query='any')
@@ -21,5 +21,10 @@ view: max_nonpriority_any_docket_index {
   dimension: distribution_case_id {
     type: number
     sql: ${TABLE}.id;;
+  }
+
+  dimension: distribution_case_appeal_id {
+    type: number
+    sql: ${TABLE}.case_id;;
   }
 }
