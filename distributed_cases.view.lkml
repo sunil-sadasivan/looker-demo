@@ -80,4 +80,18 @@ view: distributed_cases {
     type: count
     drill_fields: [id, distributions.id]
   }
+
+  measure: not_genpop_non_priority_count {
+    type: count
+    drill_fields: [distribution_id]
+    filters: {
+      field: priority
+      value: "false"
+    }
+    filters: {
+      field: genpop_query
+      value: "not_genpop"
+    }
+  }
+
 }
