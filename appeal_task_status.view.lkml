@@ -2,6 +2,11 @@ view: appeal_task_status {
   derived_table: {
     # This returns all entries of vacols.folder, along side an AOD count (to replicate the vacols.aod_cnt() function in VACOLS)
     sql: SELECT *,
+    (select max(tasks.updated_at)
+            FROM tasks  AS tasks
+            where tasks.appeal_id = appeals.id
+            limit 1
+          ) as task_max_updated_at,
           (select tasks.id
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id AND tasks.type = 'AttorneyTask'
@@ -110,6 +115,10 @@ view: appeal_task_status {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    link: {
+      label: "Link"
+      url: "https://caseflow-looker.va.gov/looks/136?f[appeals.id]={{ appeal_id }}&f[appeals.veteran_file_number]="
+    }
   }
 
   dimension: attorney_task_id {
@@ -120,6 +129,20 @@ view: appeal_task_status {
   dimension: attorney_task_status {
     type: string
     sql: ${TABLE}.attorney_task_status;;
+  }
+
+  dimension_group: task_most_recently_updated_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.task_max_updated_at;;
   }
 
   dimension_group: attorney_task_status_started_at {

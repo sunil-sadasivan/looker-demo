@@ -5,6 +5,11 @@ view: appeals {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+
+    link: {
+      label: "Appeal Task History"
+      url: "https://caseflow-looker.va.gov/looks/136?f[appeals.id]={{ id }}&f[appeals.veteran_file_number]="
+    }
   }
 
   dimension: docket_type {
