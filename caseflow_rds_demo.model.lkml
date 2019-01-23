@@ -259,6 +259,18 @@ explore: distributions {
     sql_on: ${distributions.judge_id} = ${vacols_staff.sattyid} ;;
     relationship: many_to_one
   }
+
+  join: max_nonpriority_not_genpop_docket_index {
+    type:  left_outer
+    sql_on: ${max_nonpriority_not_genpop_docket_index.distribution_id} = ${distributions.id} ;;
+    relationship: one_to_one
+  }
+
+  join: max_nonpriority_any_docket_index {
+    type:  left_outer
+    sql_on: ${max_nonpriority_any_docket_index.distribution_id} = ${distributions.id} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: distributed_cases {
@@ -273,32 +285,6 @@ explore: distributed_cases {
     sql_on: ${distributed_cases.case_id} = ${vacols_folder.ticknum} ;;
     relationship: one_to_one
   }
-
-  join: distributed_cases_not_genpop {
-    type: inner
-    sql_on: ${distributed_cases_not_genpop.distribution_id} = ${distributions.id} ;;
-    relationship: one_to_one
-  }
-
-  join: max_nonpriority_not_genpop_docket_index {
-    type:  left_outer
-    sql_on: ${distributed_cases_not_genpop.distribution_id} = ${max_nonpriority_not_genpop_docket_index.distribution_id} and ${distributed_cases_not_genpop.docket_index} = ${max_nonpriority_not_genpop_docket_index.docket_index} ;;
-    relationship: one_to_one
-  }
-
-  join: distributed_cases_any {
-    type: inner
-    sql_on: ${distributed_cases.distribution_id} = ${distributed_cases_any.distribution_id} ;;
-    relationship: one_to_one
-  }
-
-  join: max_nonpriority_any_docket_index {
-    type:  inner
-    sql_on: ${distributed_cases_any.distribution_id} = ${max_nonpriority_any_docket_index.distribution_id} and ${distributed_cases_any.docket_index} = ${max_nonpriority_any_docket_index.docket_index} ;;
-    relationship: one_to_one
-  }
-
-
 }
 
 explore: max_nonpriority_not_genpop_docket_index {}
