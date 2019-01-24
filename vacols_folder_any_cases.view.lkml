@@ -233,7 +233,7 @@ view: vacols_folder_any_cases {
 
   dimension: tinum {
     description: "Docket number"
-    type: number
+    type: string
     sql: ${TABLE}.tinum ;;
   }
 

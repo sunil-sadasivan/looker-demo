@@ -233,7 +233,7 @@ view: vacols_folder_not_genpop_cases {
 
   dimension: tinum {
     description: "Docket number"
-    type: number
+    type: string
     sql: ${TABLE}.tinum ;;
   }
 
