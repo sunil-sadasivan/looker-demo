@@ -4,7 +4,6 @@ connection: "dsva-appeals-certification-prod-replica"
 include: "*.view"
 
 # include all the dashboards
-include: "*.dashboard"
 
 datagroup: caseflow_rds_demo_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
