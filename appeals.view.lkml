@@ -61,6 +61,19 @@ view: appeals {
     sql: ${TABLE}.veteran_file_number ;;
   }
 
+  dimension: decision_hierarchy_points {
+    type: number
+    sql: case when request_issues.disposition = 'allowed' then 3
+            when request_issues.disposition = 'remanded' then 2
+            when request_issues.disposition = 'denied' then 1
+            end ;;
+  }
+
+  measure: decision_hierarchy_max_points {
+    type: number
+    sql: coalesce(MAX(${decision_hierarchy_points}), 0);;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
