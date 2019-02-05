@@ -91,6 +91,27 @@ explore: appeals {
     sql_on: ${tasks.appeal_id} = ${appeals.id} AND ${tasks.appeal_type} = 'Appeal' ;;
   }
 
+  join: task_assigned_to_user {
+    from: users
+    type: left_outer
+    sql_on: ${tasks.assigned_to_type} = 'User' AND ${tasks.assigned_to_id} = ${task_assigned_to_user.id} ;;
+    relationship: many_to_one
+  }
+
+  join: task_assigned_by_user {
+    from: users
+    type: left_outer
+    sql_on: ${tasks.assigned_to_type} = 'User' AND ${tasks.assigned_by_id} = ${task_assigned_by_user.id} ;;
+    relationship: many_to_one
+  }
+
+  join: task_assigned_to_organization {
+    from: organizations
+    type: left_outer
+    sql_on: ${tasks.assigned_to_type} IN ('Organization', 'Vso') AND ${tasks.assigned_to_id} = ${task_assigned_to_organization.id} ;;
+    relationship: many_to_one
+  }
+
   join: task_timers {
     relationship: one_to_one
     sql_on: ${task_timers.task_id} =  ${tasks.id};;
