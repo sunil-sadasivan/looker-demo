@@ -25,10 +25,10 @@ view: appeal_task_status {
             order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status_started_date,
-          (select tasks.completed_at
+          (select tasks.closed_at
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask' AND tasks.appeal_type='Appeal'
-            order by tasks.completed_at desc
+            order by tasks.closed_at desc
             limit 1
           ) as attorney_task_status_completed_date,
           (select tasks.status
@@ -51,7 +51,7 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask' AND tasks.appeal_type='Appeal'
             limit 1
           ) as judge_review_task_status_started_date,
-          (select tasks.completed_at
+          (select tasks.closed_at
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask' AND tasks.appeal_type='Appeal'
             limit 1
@@ -103,7 +103,7 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask' AND tasks.appeal_type='Appeal'
             limit 1
           ) as bva_dispatch_task_status,
-          (select tasks.completed_at
+          (select tasks.closed_at
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'BvaDispatchTask' AND tasks.appeal_type='Appeal'
             limit 1
