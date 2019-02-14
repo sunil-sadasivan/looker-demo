@@ -37,7 +37,7 @@ view: tasks {
     sql: ${TABLE}.assigned_to_id ;;
   }
 
-  dimension_group: completed {
+  dimension_group: closed {
     type: time
     timeframes: [
       raw,
@@ -48,7 +48,7 @@ view: tasks {
       quarter,
       year
     ]
-    sql: ${TABLE}.completed_at ;;
+    sql: ${TABLE}.closed_at ;;
   }
 
   dimension_group: created {
