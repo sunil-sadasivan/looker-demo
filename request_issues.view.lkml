@@ -103,11 +103,6 @@ view: request_issues {
     sql: ${TABLE}.decision_sync_submitted_at ;;
   }
 
-  dimension: description {
-    type: string
-    sql: ${TABLE}.description ;;
-  }
-
   dimension: disposition {
     type: string
     sql: ${TABLE}.disposition ;;
@@ -195,9 +190,9 @@ view: request_issues {
     sql: ${TABLE}.removed_at ;;
   }
 
-  dimension: review_request_id {
+  dimension: decision_review_id {
     type: number
-    sql: ${TABLE}.review_request_id ;;
+    sql: ${TABLE}.decision_review_id ;;
   }
 
   dimension: review_request_type {
@@ -227,7 +222,7 @@ view: request_issues {
 
   measure: appeal_request_issue_count {
     type: count
-    drill_fields: [id, review_request_id]
+    drill_fields: [id, decision_review_id]
   }
 
   measure: count {

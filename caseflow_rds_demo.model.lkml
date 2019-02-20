@@ -13,7 +13,7 @@ datagroup: caseflow_rds_demo_default_datagroup {
 persist_with: caseflow_rds_demo_default_datagroup
 
 explore: hearing_days {}
-
+explore: available_hearing_locations {}
 explore: legacy_hearings {}
 
 explore: allocations {
@@ -119,7 +119,7 @@ explore: appeals {
 
   join: request_issues {
     relationship: one_to_many
-    sql_on: ${appeals.id} = ${request_issues.review_request_id} AND
+    sql_on: ${appeals.id} = ${request_issues.decision_review_id} AND
     ${request_issues.review_request_type} = 'Appeal' ;;
   }
 
@@ -177,7 +177,7 @@ explore: attorney_case_reviews {
 
   join: request_issues {
     type: left_outer
-    sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id} ;;
+    sql_on: ${tasks.appeal_id} = ${request_issues.decision_review_id} ;;
     relationship: many_to_one
   }
 
@@ -622,7 +622,7 @@ explore: tasks {
   }
 
   join: request_issues {
-    sql_on: ${tasks.appeal_id} = ${request_issues.review_request_id};;
+    sql_on: ${tasks.appeal_id} = ${request_issues.decision_review_id};;
     relationship: many_to_many
   }
 
