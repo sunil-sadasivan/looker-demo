@@ -32,6 +32,11 @@ view: request_issues {
     sql:  ${TABLE}.contested_issue_description ;;
   }
 
+  dimension: unidentified_issue_text {
+    type: string
+    sql:  ${TABLE}.unidentified_issue_text ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
