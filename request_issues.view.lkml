@@ -27,6 +27,11 @@ view: request_issues {
     sql: ${TABLE}.contested_decision_issue_id ;;
   }
 
+  dimension: contested_issue_description {
+    type: string
+    sql:  ${TABLE}.contested_issue_description ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -157,25 +162,6 @@ view: request_issues {
     sql: ${TABLE}.rating_issue_associated_at ;;
   }
 
-  dimension_group: rating_issue_profile {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.rating_issue_profile_date ;;
-  }
-
-  dimension: rating_issue_reference_id {
-    type: string
-    sql: ${TABLE}.rating_issue_reference_id ;;
-  }
-
   dimension_group: removed {
     type: time
     timeframes: [
@@ -193,11 +179,6 @@ view: request_issues {
   dimension: decision_review_id {
     type: number
     sql: ${TABLE}.decision_review_id ;;
-  }
-
-  dimension: review_request_type {
-    type: string
-    sql: ${TABLE}.review_request_type ;;
   }
 
   dimension: untimely_exemption {

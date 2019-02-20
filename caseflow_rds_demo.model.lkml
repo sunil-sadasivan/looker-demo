@@ -119,14 +119,12 @@ explore: appeals {
 
   join: request_issues {
     relationship: one_to_many
-    sql_on: ${appeals.id} = ${request_issues.decision_review_id} AND
-    ${request_issues.review_request_type} = 'Appeal' ;;
+    sql_on: ${appeals.id} = ${request_issues.decision_review_id} ;;
   }
 
   join: decision_issues {
     relationship: one_to_many
-    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} AND
-      ${decision_issues.decision_review_type} = 'Appeal' ;;
+    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} ;;
   }
 
   join: decision_documents {
