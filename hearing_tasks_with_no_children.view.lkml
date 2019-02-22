@@ -45,3 +45,5 @@ view: hearing_tasks_with_no_children {
     fields: [tasks_type, tasks_appeal_id, tasks_appeal_type, count_of_child_tasks]
   }
 }
+
+explore: hearing_tasks_with_no_children {}
