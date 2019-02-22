@@ -206,6 +206,47 @@ view: request_issues {
     sql: ${TABLE}.vacols_sequence_id ;;
   }
 
+  dimension: decision_doc_date {
+    type: date
+    sql: decision_documents.decision_date ;;
+  }
+
+  measure: pending_appeal_request_issue_count {
+    type: count
+    filters: {
+      field: decision_doc_date
+      value: "NULL"
+    }
+    drill_fields: [id, decision_review_id]
+  }
+
+  measure: average_pending_days {
+    type: average
+    sql: DATEDIFF(day, ${appeals.receipt_date}, CURRENT_DATE) ;;
+    filters: {
+      field: decision_doc_date
+      value: "NULL"
+    }
+  }
+
+  measure: completed_appeal_request_issue_count {
+    type: count
+    filters: {
+      field: decision_doc_date
+      value: "-NULL"
+    }
+    drill_fields: [id, decision_review_id]
+  }
+
+  measure: average_completed_days {
+    type: average
+    sql: DATEDIFF(day, ${appeals.receipt_date}, CURRENT_DATE) ;;
+    filters: {
+      field: decision_doc_date
+      value: "-NULL"
+    }
+  }
+
   measure: appeal_request_issue_count {
     type: count
     drill_fields: [id, decision_review_id]

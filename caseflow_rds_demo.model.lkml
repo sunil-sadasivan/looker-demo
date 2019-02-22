@@ -557,9 +557,26 @@ explore: remand_reasons {
     sql_on: ${remand_reasons.request_issue_id} = ${request_issues.id};;
     relationship: many_to_one
   }
+
+  join: appeals {
+    sql_on: ${request_issues.decision_review_id} = ${appeals.id};;
+    relationship: many_to_one
+  }
 }
 
 explore: request_issues {
+  join: appeals {
+    type: left_outer
+    sql_on: ${request_issues.decision_review_id} = ${appeals.id} ;;
+    relationship: many_to_one
+  }
+
+  join: decision_documents {
+    type: left_outer
+    sql_on: ${request_issues.decision_review_id} = ${decision_documents.appeal_id} ;;
+    relationship: many_to_one
+  }
+
   join: remand_reasons {
     sql_on: ${request_issues.id} = ${remand_reasons.request_issue_id};;
     relationship: many_to_one
