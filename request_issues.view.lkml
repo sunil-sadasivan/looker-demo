@@ -240,7 +240,7 @@ view: request_issues {
 
   measure: average_completed_days {
     type: average
-    sql: DATEDIFF(day, ${appeals.receipt_date}, CURRENT_DATE) ;;
+    sql: DATEDIFF(day, ${appeals.receipt_date}, ${decision_doc_date}) ;;
     filters: {
       field: decision_doc_date
       value: "-NULL"
