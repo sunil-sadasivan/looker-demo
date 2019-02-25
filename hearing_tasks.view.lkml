@@ -104,7 +104,7 @@ ORDER BY 1 DESC
 
   dimension: change_disposition_tasks {
     type: number
-    sql: ${TABLE}change_disposition_tasks ;;
+    sql: ${TABLE}.change_disposition_tasks ;;
   }
 
   dimension: count_of_child_tasks {
