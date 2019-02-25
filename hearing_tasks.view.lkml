@@ -67,6 +67,46 @@ ORDER BY 1 DESC
     sql: ${TABLE}."tasks.appeal_type" ;;
   }
 
+  dimension: hearing_task_associations_id {
+    type: string
+    sql: ${TABLE}."hearing_task_associations.id" ;;
+  }
+
+  dimension: legacy_appeals_vacols_id {
+    type: string
+    sql: ${TABLE}."legacy_appeals.vacols_id" ;;
+  }
+
+  dimension: legacy_appeals_vbms_id {
+    type: string
+    sql: ${TABLE}."legacy_appeals.vbms_id" ;;
+  }
+
+  dimension: external_id {
+    type: string
+    sql: ${TABLE}.external_id ;;
+  }
+
+  dimension: closest_regional_office {
+    type: string
+    sql: ${TABLE}.closest_regional_office ;;
+  }
+
+  dimension: schedule_hearing_tasks {
+    type: number
+    sql: ${TABLE}.schedule_hearing_tasks ;;
+  }
+
+  dimension: disposition_tasks {
+    type: number
+    sql: ${TABLE}.disposition_tasks ;;
+  }
+
+  dimension: change_disposition_tasks {
+    type: number
+    sql: ${TABLE}change_disposition_tasks ;;
+  }
+
   dimension: count_of_child_tasks {
     type: number
     sql: ${TABLE}.count_of_child_tasks ;;
