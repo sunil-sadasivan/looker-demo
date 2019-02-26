@@ -5,6 +5,10 @@ view: hearing_tasks {
   tasks.type  AS "tasks.type",
   tasks.appeal_id  AS "tasks.appeal_id",
   tasks.appeal_type  AS "tasks.appeal_type",
+  tasks.status AS "tasks.status",
+  tasks.on_hold_duration AS "tasks.on_hold_duration",
+  tasks.placed_on_hold_at AS "tasks.placed_on_hold_at",
+  tasks.started_at AS "tasks.started_at",
   hearing_task_associations.id AS "hearing_task_associations.id",
   legacy_appeals.vacols_id AS "legacy_appeals.vacols_id",
   legacy_appeals.vbms_id AS "legacy_appeals.vbms_id",
@@ -42,7 +46,7 @@ LEFT JOIN public.legacy_appeals AS legacy_appeals ON tasks.appeal_id = legacy_ap
   AND tasks.appeal_type = 'LegacyAppeal'
 WHERE
   (tasks.type = 'HearingTask')
-GROUP BY 1,2,3,4,5,6,7,8,9
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 ORDER BY 1 DESC
        ;;
   }
@@ -67,6 +71,36 @@ ORDER BY 1 DESC
     sql: ${TABLE}."tasks.appeal_type" ;;
   }
 
+  dimension: tasks_on_hold_duration {
+    type: string
+    sql: ${TABLE}."tasks.on_hold_duration" ;;
+  }
+
+  dimension: tasks_status {
+    type: string
+    sql: ${TABLE}."tasks.status" ;;
+  }
+
+  dimension: tasks_placed_on_hold_at {
+    type: date_time
+    sql: ${TABLE}."tasks.placed_on_hold_at" ;;
+  }
+
+  dimension: tasks_started_at {
+    type: date_time
+    sql: ${TABLE}."tasks.started_at" ;;
+  }
+
+  dimension: days_on_hold {
+    type: string
+    sql: ${TABLE}."days_on_hold" ;;
+  }
+
+  dimension: legacy_appeals_vbms_id {
+    type: string
+    sql: ${TABLE}."legacy_appeals.vbms_id" ;;
+  }
+
   dimension: hearing_task_associations_id {
     type: string
     sql: ${TABLE}."hearing_task_associations.id" ;;
@@ -75,11 +109,6 @@ ORDER BY 1 DESC
   dimension: legacy_appeals_vacols_id {
     type: string
     sql: ${TABLE}."legacy_appeals.vacols_id" ;;
-  }
-
-  dimension: legacy_appeals_vbms_id {
-    type: string
-    sql: ${TABLE}."legacy_appeals.vbms_id" ;;
   }
 
   dimension: external_id {
