@@ -15,19 +15,19 @@ view: appeal_task_status {
           ) as attorney_task_id,
           (select tasks.status
             FROM tasks  AS tasks
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask' AND tasks.appeal_type='Appeal'
+            where tasks.appeal_id = appeals.id  AND (tasks.type = 'AttorneyTask' or tasks.type = 'AttorneyRewriteTask') AND tasks.appeal_type='Appeal'
             order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status,
           (select tasks.started_at
             FROM tasks  AS tasks
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask' AND tasks.appeal_type='Appeal'
+            where tasks.appeal_id = appeals.id  AND (tasks.type = 'AttorneyTask' or tasks.type = 'AttorneyRewriteTask') AND tasks.appeal_type='Appeal'
             order by tasks.assigned_at desc
             limit 1
           ) as attorney_task_status_started_date,
           (select tasks.closed_at
             FROM tasks  AS tasks
-            where tasks.appeal_id = appeals.id  AND tasks.type = 'AttorneyTask' AND tasks.appeal_type='Appeal'
+            where tasks.appeal_id = appeals.id  AND (tasks.type = 'AttorneyTask' or tasks.type = 'AttorneyRewriteTask') AND tasks.appeal_type='Appeal'
             order by tasks.closed_at desc
             limit 1
           ) as attorney_task_status_completed_date,
@@ -56,6 +56,12 @@ view: appeal_task_status {
             where tasks.appeal_id = appeals.id  AND tasks.type = 'JudgeDecisionReviewTask' AND tasks.appeal_type='Appeal'
             limit 1
           ) as judge_review_task_status_completed_date,
+          (select tasks.status
+            FROM tasks  AS tasks
+              where tasks.appeal_id = appeals.id  AND tasks.type = 'ColocatedTask' AND tasks.appeal_type='Appeal'
+            order by tasks.closed_at desc
+            limit 1
+          ) as colocated_task_status,
           (select tasks.status
             FROM tasks  AS tasks
             where tasks.appeal_id = appeals.id  AND tasks.type = 'QualityReviewTask' AND tasks.appeal_type='Appeal'
@@ -129,6 +135,11 @@ view: appeal_task_status {
   dimension: attorney_task_status {
     type: string
     sql: ${TABLE}.attorney_task_status;;
+  }
+
+  dimension: colocated_task_status {
+    type: string
+    sql:  ${TABLE}.colocated_task_status ;;
   }
 
   dimension_group: task_most_recently_updated_at {
@@ -330,7 +341,8 @@ view: appeal_task_status {
         label: "1. Not distributed"
       }
       when: {
-        sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} is null;;
+        sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress' or
+          (${colocated_task_status} = 'assigned' or ${colocated_task_status} = 'on_hold')) and ${attorney_task_status} is null;;
         label: "2. Distributed to judge"
       }
       when: {
