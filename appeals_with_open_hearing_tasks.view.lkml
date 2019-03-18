@@ -31,7 +31,7 @@ view: appeals_with_open_hearing_tasks {
       AND status IN ('assigned', 'on_hold', NULL)
       AND type = 'ChangeDispositionTask'
     ) AS "open_change_disposition_tasks"
-    FROM public.appeals
+    FROM public.appeals WHERE total_open_tasks > 0
     UNION
     SELECT legacy_appeals.id AS id, vacols_id AS external_id, closest_regional_office, 'LegacyAppeal' AS appeal_type,
     (
@@ -64,7 +64,7 @@ view: appeals_with_open_hearing_tasks {
       AND status IN ('assigned', 'on_hold', NULL)
       AND type = 'ChangeDispositionTask'
     ) AS "open_change_disposition_tasks"
-    FROM public.legacy_appeals
+    FROM public.legacy_appeals WHERE total_open_tasks > 0
              ;;
   }
 
