@@ -124,7 +124,7 @@ explore: appeals {
 
   join: decision_issues {
     relationship: one_to_many
-    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} ;;
+    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} AND ${decision_issues.decision_review_type} = 'Appeal' ;;
   }
 
   join: decision_documents {
