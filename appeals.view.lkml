@@ -17,6 +17,12 @@ view: appeals {
     sql: ${TABLE}.docket_type ;;
   }
 
+  dimension: closest_regional_office {
+    type: string
+    sql: ${TABLE}.closest_regional_office ;;
+  }
+
+
   dimension_group: established {
     type: time
     timeframes: [

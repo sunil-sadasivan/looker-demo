@@ -15,6 +15,12 @@ persist_with: caseflow_rds_demo_default_datagroup
 explore: hearing_days {}
 explore: available_hearing_locations {}
 explore: legacy_hearings {}
+explore: decision_documents {}
+explore: hearing_issue_notes {}
+explore: hearing_locations {}
+explore: request_issues_updates {}
+explore: special_issue_lists {}
+explore: transcriptions {}
 
 explore: allocations {
   join: schedule_periods {
@@ -45,6 +51,7 @@ explore: annotations {
 }
 
 explore: api_keys {}
+explore: vso_configs {}
 
 explore: api_views {
   join: api_keys {
@@ -397,7 +404,7 @@ explore: hearing_appeal_stream_snapshots {
 
   join: users {
     type: left_outer
-    sql_on: ${hearings.user_id} = ${users.id} ;;
+    sql_on: ${hearings.judge_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
@@ -425,7 +432,7 @@ explore: hearing_views {
 explore: hearings {
   join: users {
     type: left_outer
-    sql_on: ${hearings.user_id} = ${users.id} ;;
+    sql_on: ${hearings.judge_id} = ${users.id} ;;
     relationship: many_to_one
   }
 

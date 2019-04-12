@@ -14,12 +14,12 @@ view: claimants {
 
   dimension: review_request_id {
     type: number
-    sql: ${TABLE}.review_request_id ;;
+    sql: ${TABLE}.decision_review_id ;;
   }
 
   dimension: review_request_type {
     type: string
-    sql: ${TABLE}.review_request_type ;;
+    sql: ${TABLE}.decision_review_type ;;
   }
 
   measure: count {

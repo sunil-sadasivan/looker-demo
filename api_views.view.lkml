@@ -13,6 +13,12 @@ view: api_views {
     sql: ${TABLE}.api_key_id ;;
   }
 
+  dimension: source {
+    type: number
+    # hidden: yes
+    sql: ${TABLE}.source ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
