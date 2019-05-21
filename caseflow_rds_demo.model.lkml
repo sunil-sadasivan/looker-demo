@@ -259,9 +259,9 @@ explore: claims_folder_searches {
 explore: decision_issues {}
 
 explore: dispatch_tasks {
-  join: appeals {
+  join: legacy_appeals {
     type: left_outer
-    sql_on: ${dispatch_tasks.appeal_id} = ${appeals.id} ;;
+    sql_on: ${dispatch_tasks.appeal_id} = ${legacy_appeals.id} ;;
     relationship: many_to_one
   }
 
@@ -787,3 +787,11 @@ explore: vacols_issues{
 }
 
 explore: vacols_tbsched {}
+
+explore: vacols_priorloc {
+  join: vacols_brieff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_brieff.bfkey} ;;
+  }
+}
