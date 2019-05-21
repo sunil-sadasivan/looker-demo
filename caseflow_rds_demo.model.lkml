@@ -737,6 +737,12 @@ explore: vacols_decass {
     relationship: many_to_one
     sql_on: ${vacols_decass.deatty} = ${vacols_staff.sattyid} ;;
   }
+
+  join: vacols_brieff {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${vacols_decass.defolder} = ${vacols_brieff.bfkey} ;;
+  }
 }
 
 explore: vacols_hearsched {
@@ -793,5 +799,11 @@ explore: vacols_priorloc {
     type: left_outer
     relationship: many_to_one
     sql_on: ${vacols_priorloc.lockey} = ${vacols_brieff.bfkey} ;;
+  }
+
+  join: vacols_decass {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_decass.defolder} ;;
   }
 }
