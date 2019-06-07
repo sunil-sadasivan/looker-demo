@@ -27,6 +27,20 @@ view: users {
     sql: ${TABLE}.roles ;;
   }
 
+  dimension_group: efolder_documents_fetched_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.efolder_documents_fetched_at ;;
+  }
+
   dimension: selected_regional_office {
     type: string
     sql: ${TABLE}.selected_regional_office ;;
