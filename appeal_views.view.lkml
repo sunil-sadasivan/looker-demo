@@ -13,6 +13,12 @@ view: appeal_views {
     sql: ${TABLE}.appeal_id ;;
   }
 
+  dimension: appeal_type {
+    type: number
+    # hidden: yes
+    sql: ${TABLE}.appeal_type ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [

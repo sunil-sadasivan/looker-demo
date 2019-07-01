@@ -45,9 +45,9 @@ view: hearing_days {
     sql: ${TABLE}.deleted_at ;;
   }
 
-  dimension: hearing_type {
+  dimension: request_type {
     type: string
-    sql: ${TABLE}.hearing_type ;;
+    sql: ${TABLE}.request_type ;;
   }
 
   dimension: judge_id {

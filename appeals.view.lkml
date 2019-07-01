@@ -17,6 +17,12 @@ view: appeals {
     sql: ${TABLE}.docket_type ;;
   }
 
+  dimension: closest_regional_office {
+    type: string
+    sql: ${TABLE}.closest_regional_office ;;
+  }
+
+
   dimension_group: established {
     type: time
     timeframes: [
@@ -83,6 +89,9 @@ view: appeals {
   set: detail {
     fields: [
       id,
+      appeal_task_status.decision_status,
+      appeal_task_status.task_judge_name,
+      appeal_task_status.task_attorney_name,
       appeal_views.count,
       claims_folder_searches.count,
       dispatch_tasks.count,

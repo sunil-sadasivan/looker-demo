@@ -350,24 +350,32 @@ view: appeal_task_status {
         label: "3. Assigned to attorney"
       }
       when: {
+        sql: (${judge_task_status} = 'on_hold' or ${attorney_task_status} = 'on_hold') and ${colocated_task_status} = 'assigned' or ${colocated_task_status} = 'in_progress';;
+        label: "4. Assigned to colocated"
+      }
+      when: {
         sql: (${judge_task_status} = 'on_hold' or ${quality_review_task_status} = 'on_hold') and ${attorney_task_status} = 'in_progress';;
-        label: "4. Decision in progress"
+        label: "5. Decision in progress"
       }
       when: {
         sql: (${judge_task_status} = 'assigned' or ${judge_task_status} = 'in_progress') and ${attorney_task_status} = 'completed';;
-        label: "5. Decision ready for signature"
+        label: "6. Decision ready for signature"
       }
       when: {
         sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed' and (${bva_dispatch_task_status} is null or ${bva_dispatch_task_status} != 'completed');;
-        label: "6. Decision signed"
+        label: "7. Decision signed"
       }
       when: {
         sql: ${judge_task_status} = 'completed' and ${attorney_task_status} = 'completed' and ${bva_dispatch_task_status} = 'completed';;
-        label: "7. Decision dispatched"
+        label: "8. Decision dispatched"
       }
       when: {
-        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'on_hold';;
+        sql: ${judge_task_status} = 'on_hold' and ${attorney_task_status} = 'on_hold' and ${colocated_task_status} = 'on_hold';;
         label: "ON HOLD"
+      }
+      when: {
+        sql: ${judge_task_status} = 'cancelled' or ${attorney_task_status} = 'cancelled';;
+        label: "CANCELLED"
       }
     }
   }

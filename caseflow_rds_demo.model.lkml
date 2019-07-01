@@ -15,6 +15,12 @@ persist_with: caseflow_rds_demo_default_datagroup
 explore: hearing_days {}
 explore: available_hearing_locations {}
 explore: legacy_hearings {}
+explore: decision_documents {}
+explore: hearing_issue_notes {}
+explore: hearing_locations {}
+explore: request_issues_updates {}
+explore: special_issue_lists {}
+explore: transcriptions {}
 
 explore: allocations {
   join: schedule_periods {
@@ -45,6 +51,7 @@ explore: annotations {
 }
 
 explore: api_keys {}
+explore: vso_configs {}
 
 explore: api_views {
   join: api_keys {
@@ -124,7 +131,7 @@ explore: appeals {
 
   join: decision_issues {
     relationship: one_to_many
-    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} ;;
+    sql_on: ${appeals.id} = ${decision_issues.decision_review_id} AND ${decision_issues.decision_review_type} = 'Appeal' ;;
   }
 
   join: decision_documents {
@@ -252,9 +259,9 @@ explore: claims_folder_searches {
 explore: decision_issues {}
 
 explore: dispatch_tasks {
-  join: appeals {
+  join: legacy_appeals {
     type: left_outer
-    sql_on: ${dispatch_tasks.appeal_id} = ${appeals.id} ;;
+    sql_on: ${dispatch_tasks.appeal_id} = ${legacy_appeals.id} ;;
     relationship: many_to_one
   }
 
@@ -397,7 +404,7 @@ explore: hearing_appeal_stream_snapshots {
 
   join: users {
     type: left_outer
-    sql_on: ${hearings.user_id} = ${users.id} ;;
+    sql_on: ${hearings.judge_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
@@ -425,7 +432,7 @@ explore: hearing_views {
 explore: hearings {
   join: users {
     type: left_outer
-    sql_on: ${hearings.user_id} = ${users.id} ;;
+    sql_on: ${hearings.judge_id} = ${users.id} ;;
     relationship: many_to_one
   }
 
@@ -730,6 +737,12 @@ explore: vacols_decass {
     relationship: many_to_one
     sql_on: ${vacols_decass.deatty} = ${vacols_staff.sattyid} ;;
   }
+
+  join: vacols_brieff {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${vacols_decass.defolder} = ${vacols_brieff.bfkey} ;;
+  }
 }
 
 explore: vacols_hearsched {
@@ -780,3 +793,17 @@ explore: vacols_issues{
 }
 
 explore: vacols_tbsched {}
+
+explore: vacols_priorloc {
+  join: vacols_brieff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_brieff.bfkey} ;;
+  }
+
+  join: vacols_decass {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_decass.defolder} ;;
+  }
+}

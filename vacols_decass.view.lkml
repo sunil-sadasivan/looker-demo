@@ -1,9 +1,25 @@
 view: vacols_decass {
-  sql_table_name: VACOLS.DECASS ;;
+  derived_table: {
+    sql: select *, (select p.locdin from VACOLS.PRIORLOC p WHERE p.lockey=de.defolder AND p.locstto = '81' ORDER BY p.locdin DESC LIMIT 1) as distribution_date    from VACOLS.DECASS de ;;
+  }
 
   dimension: de1_touch {
     type: string
     sql: ${TABLE}."DE1TOUCH" ;;
+  }
+
+  dimension_group: distribution {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."distribution_date" ;;
   }
 
   dimension_group: deadtim {
@@ -257,6 +273,26 @@ view: vacols_decass {
   dimension: detrem {
     type: string
     sql: ${TABLE}."DETREM" ;;
+  }
+
+  dimension: days_from_distribution_to_attorney {
+    type: number
+    sql: ${deassign_date} - ${distribution_date} ;;
+  }
+
+  dimension: days_from_attorney_to_vlj {
+    type: number
+    sql: ${dereceive_date} - ${deassign_date};;
+  }
+
+  measure: median_days_from_distribution_to_attorney {
+    type: median
+    sql: ${days_from_distribution_to_attorney} ;;
+  }
+
+  measure: median_days_from_attorney_to_vlj {
+    type: median
+    sql: ${days_from_attorney_to_vlj};;
   }
 
   measure: defolder_count {

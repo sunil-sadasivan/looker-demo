@@ -1,12 +1,27 @@
 view: vacols_brieff {
-  sql_table_name: vacols.brieff ;;
 
-  dimension: _cnt {
-    description:  "AOD Status Count (if > 0, then this is indicated as AOD status)"
-    type: number
-    sql: ${TABLE}.AOD;;
+  derived_table: {
+    sql:select *, ((select count(*) into dcnt from vacols.assign
+            where tsktknm = bf.bfkey  and tskactcd in ('B', 'B1', 'B2')
+        ) +
+        (select count(*) into hcnt from vacols.hearsched where folder_nr = bf.bfkey
+          and hearing_type in ('C', 'T', 'V') and aod in ('G', 'Y'))
+        ) as aod_count
+         from vacols.brieff bf
+        ;;
   }
 
+  dimension: _aod_cnt {
+    description:  "AOD Status Count (if > 0, then this is indicated as AOD status)"
+    type: number
+    sql: ${TABLE}.aod_count;;
+  }
+
+  dimension: is_aod {
+    description: "Is AOD based on AOD Status count"
+    type: yesno
+    sql: ${_aod_cnt} > 0 ;;
+  }
 
   dimension_group: bf41_stat {
     description: "Date/Time Certified to BVA"
