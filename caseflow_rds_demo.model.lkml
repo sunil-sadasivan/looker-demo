@@ -441,6 +441,12 @@ explore: hearings {
     sql_on: ${hearings.appeal_id} = ${appeals.id} ;;
     relationship: many_to_one
   }
+
+  join: hearing_days {
+    type: left_outer
+    sql_on: ${hearings.hearing_day_id} = ${hearing_days.id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: higher_level_reviews {}
