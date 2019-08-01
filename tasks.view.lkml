@@ -13,6 +13,11 @@ view: tasks {
     sql: ${TABLE}.appeal_id ;;
   }
 
+  dimension: parent_id {
+    type: number
+    sql: ${TABLE}.parent_id ;;
+  }
+
   dimension_group: assigned {
     type: time
     timeframes: [

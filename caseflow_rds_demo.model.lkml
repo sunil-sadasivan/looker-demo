@@ -259,9 +259,9 @@ explore: claims_folder_searches {
 explore: decision_issues {}
 
 explore: dispatch_tasks {
-  join: appeals {
+  join: legacy_appeals {
     type: left_outer
-    sql_on: ${dispatch_tasks.appeal_id} = ${appeals.id} ;;
+    sql_on: ${dispatch_tasks.appeal_id} = ${legacy_appeals.id} ;;
     relationship: many_to_one
   }
 
@@ -439,6 +439,12 @@ explore: hearings {
   join: appeals {
     type: left_outer
     sql_on: ${hearings.appeal_id} = ${appeals.id} ;;
+    relationship: many_to_one
+  }
+
+  join: hearing_days {
+    type: left_outer
+    sql_on: ${hearings.hearing_day_id} = ${hearing_days.id} ;;
     relationship: many_to_one
   }
 }
@@ -737,6 +743,12 @@ explore: vacols_decass {
     relationship: many_to_one
     sql_on: ${vacols_decass.deatty} = ${vacols_staff.sattyid} ;;
   }
+
+  join: vacols_brieff {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${vacols_decass.defolder} = ${vacols_brieff.bfkey} ;;
+  }
 }
 
 explore: vacols_hearsched {
@@ -787,3 +799,17 @@ explore: vacols_issues{
 }
 
 explore: vacols_tbsched {}
+
+explore: vacols_priorloc {
+  join: vacols_brieff {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_brieff.bfkey} ;;
+  }
+
+  join: vacols_decass {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${vacols_priorloc.lockey} = ${vacols_decass.defolder} ;;
+  }
+}
