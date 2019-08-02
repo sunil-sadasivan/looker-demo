@@ -54,6 +54,20 @@ view: task_timers {
     sql: ${TABLE}.processed_at ;;
   }
 
+  dimension_group: canceled {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.canceled_at ;;
+  }
+
   dimension_group: submitted {
     type: time
     timeframes: [
