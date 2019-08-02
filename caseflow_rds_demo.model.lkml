@@ -21,6 +21,7 @@ explore: hearing_locations {}
 explore: request_issues_updates {}
 explore: special_issue_lists {}
 explore: transcriptions {}
+explore: task_timers {}
 
 explore: allocations {
   join: schedule_periods {
